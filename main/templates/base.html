@@ -1,0 +1,60 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Título do Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n5UYc395PdgONW39GFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Início</a></li>
+                <li><a href="{% url 'quem_somos' %}">Quem Somos</a></li>
+                <li><a href="{% url 'como_ajudamos' %}">Como Ajudamos</a></li>
+                <li><a href="{% url 'preciso_de_ajuda' %}">Preciso de Ajuda</a></li>
+                <li><a href="{% url 'como_ajudar' %}">Como Você Pode Ajudar</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
+            </ul>
+        </nav>
+
+<div class="carousel-container">
+            <div class="carousel-slide">
+                {% for image in carousel_images %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                    {% if image.title or image.description %}
+                    <div class="carousel-caption">
+                        <h3>{{ image.title }}</h3>
+                        <p>{{ image.description }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">❮</button>
+            <button class="next" onclick="moveSlide(1)">❯</button>
+        </div>
+    </header>
+
+    <main>   
+
+    {% block content %}
+
+    {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ year }} [Nome da sua ONG] - Todos os direitos reservados</p>
+          </footer>
+</body>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
+
+</html>
