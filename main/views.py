@@ -1,16 +1,11 @@
 from django.shortcuts import render
-from .models import CasoDeAjuda
-
-def home(request):
-    casos = CasoDeAjuda.objects.all()  # Busca todos os casos de ajuda do banco de dados
-    return render(request, 'home.html', {'casos': casos})
-
-from django.shortcuts import render
-from .models import CasoDeAjuda
+from .models import CasoDeAjuda,CarouselImage
 
 def home(request):
     casos = CasoDeAjuda.objects.all()
-    return render(request, 'home.html', {'casos': casos})
+    carousel_images = CarouselImage.objects.filter(is_active=True)
+    return render(request, 'home.html', {'casos': casos,'carousel_images': carousel_images})
+    
 
 def quem_somos(request):
     return render(request, 'quem_somos.html')

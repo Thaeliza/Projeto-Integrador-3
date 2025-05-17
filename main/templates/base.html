@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Título do Site{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n5UYc395PdgONW39GFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
 </head>
@@ -23,36 +24,81 @@
                 <li><a href="{% url 'contato' %}">Contato</a></li>
             </ul>
         </nav>
-
-<div class="carousel-container">
-            <div class="carousel-slide">
-                {% for image in carousel_images %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                    {% if image.title or image.description %}
-                    <div class="carousel-caption">
-                        <h3>{{ image.title }}</h3>
-                        <p>{{ image.description }}</p>
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <button class="prev" onclick="moveSlide(-1)">❮</button>
-            <button class="next" onclick="moveSlide(1)">❯</button>
-        </div>
     </header>
 
-    <main>   
+        <div class="carousel-container">
+        <div class="carousel-slide">
+            {% for image in carousel_images %}
+            <div class="carousel-item">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                {% if image.title or image.description %}
+                <div class="carousel-caption">
+                    <h3>{{ image.title }}</h3>
+                    <p>{{ image.description }}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <main>
+
 
     {% block content %}
 
     {% endblock %}
     </main>
 
-    <footer>
-        <p>&copy; {{ year }} [Nome da sua ONG] - Todos os direitos reservados</p>
-          </footer>
+<footer>
+  <div class="footer-grid">
+    <div class="contato">
+      <h5>Contato</h5>
+      <p>
+        Telefone: (11) 9999-9999<br>
+        Email: contato@exemplo.com
+      </p>
+    </div>
+
+    <div class="links-uteis">
+      <h5>Links Úteis</h5>
+      <ul>
+        <li><a href="#">Página Inicial</a></li>
+        <li><a href="#">Serviços</a></li>
+        <li><a href="#">Contato</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+      </ul>
+    </div>
+
+    <div class="links-uteis">
+      <h5>Mapa do Site</h5>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Quem somos</a></li>
+        <li><a href="#">Nossas Ações</a></li>
+        <li><a href="#">Transparência</a></li>
+        <li><a href="#">Como Ajudar</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </div>
+    
+    <div class="redes-sociais">
+      <h5>Redes Sociais</h5>
+       <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X</a></li>
+      </ul>
+    </div>  
+
+    <div class="logo">
+      <img src="static\img\foto-footer.jpg" alt="Projeto Sarah">
+    </div>
+  </div>
+  <hr>
+  <p class="copyright">&copy; 2025 Sua Empresa. Todos os direitos reservados.</p>
+</footer>
+
 </body>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/carousel.js' %}"></script>
