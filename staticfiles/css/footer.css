@@ -1,0 +1,65 @@
+footer {
+    background-color: #F19E8E;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    align-items: center;
+    gap: 15px;
+}
+
+.sobre-nos h5,
+.links-uteis h5,
+.contato h5,
+.outra-div h5 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.sobre-nos p,
+.links-uteis ul,
+.contato p,
+.redes-sociais p,
+.redes-sociais li {
+    color: #000000;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+    text-decoration: none;
+}
+
+.links-uteis ul {
+    list-style: none;
+    padding: 0;
+}
+
+.links-uteis a {
+    color: #0a0a0a;
+    text-decoration: none;
+}
+
+.logo {
+    justify-self: end;
+}
+
+.logo img {
+    max-width: 120px;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+hr {
+    margin-top: 20px;
+    border: 0;
+    border-top: 1px solid #FFE2DC;
+}
+
+.copyright {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 10px;
+    margin-bottom: 0;
+}

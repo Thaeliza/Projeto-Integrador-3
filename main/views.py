@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import CasoDeAjuda,CarouselImage
+from .forms import ContatoForm 
 
 def home(request):
     casos = CasoDeAjuda.objects.all()
@@ -20,4 +21,12 @@ def como_ajudar(request):
     return render(request, 'como_ajudar.html')
 
 def contato(request):
-    return render(request, 'contato.html')
+    if request.method == 'POST':
+        form = ContatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ContatoForm()
+
+    return render(request, 'contato.html', {'form': form})
