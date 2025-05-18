@@ -17,8 +17,8 @@ body {
 
 /* Estilos do cabeçalho e navegação */
 header {
-    background-color: #333;
-    color: white;
+    background-color: #F19E8E;
+    color: #606B8D;
     padding: 1em 0;
 }
 
@@ -35,8 +35,9 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: #606B8D;
     text-decoration: none;
+    font-weight: bold;
 }
 
 nav ul li a:hover {
@@ -50,19 +51,4 @@ main {
     margin: 20px auto;
     max-width: 960px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos do rodapé */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
 }
