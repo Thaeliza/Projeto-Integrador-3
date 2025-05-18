@@ -1,0 +1,36 @@
+# Arquivos Python compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Diretório de banco de dados SQLite (se você estiver usando para desenvolvimento)
+*.sqlite3
+
+# Arquivos de configurações locais (informações sensíveis)
+local_settings.py
+.env
+venv/   # Se você usa venv
+
+# Arquivos de log
+*.log
+
+# Diretório de arquivos estáticos coletados (geralmente para produção)
+staticfiles/
+
+# Diretório de arquivos de mídia do usuário (se não estiver em um serviço de armazenamento separado)
+media/
+
+# Arquivos temporários de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos e diretórios específicos do seu editor/IDE
+.idea/         # IntelliJ IDEA
+.vscode/       # Visual Studio Code
+*.swp          # Arquivos de swap do Vim
+*.swo
+
+# Dependências instaladas (se você não commita a pasta do ambiente virtual)
+# my_project/lib/python3.9/site-packages/  # Exemplo, evite commitar a pasta inteira
+main/__pycache__/
