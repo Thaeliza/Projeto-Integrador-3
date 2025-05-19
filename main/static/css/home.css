@@ -1,0 +1,17 @@
+.carousel-container {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+}
+
+.card-wrapper {
+    flex: 0 0 auto;
+    width: calc(100% / 3);
+    padding-right: 10px;
+}

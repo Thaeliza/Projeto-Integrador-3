@@ -29,3 +29,13 @@ class Contato(models.Model):
     email = models.EmailField(null=True, default="Insira seu Email")
     telefone = models.CharField(max_length=20, null=True, default="Insira um telefone")
     observacoes = models.TextField(null=True, default='Sem observações')
+    
+    from django.db import models
+
+class Depoimento(models.Model):
+    imagem = models.ImageField(upload_to='depoimentos/', null=True, blank=True)
+    titulo = models.CharField(max_length=255)
+    texto = models.TextField()
+
+    def __str__(self):
+        return self.titulo

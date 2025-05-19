@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CasoDeAjuda,CarouselImage
+from .models import CasoDeAjuda,CarouselImage,Depoimento
 
 
 
@@ -10,3 +10,5 @@ class CarouselImageAdmin(admin.ModelAdmin):
 
 admin.site.register(CarouselImage)
 admin.site.register(CasoDeAjuda)
+admin.site.register(Depoimento)
+

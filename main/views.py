@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect
-from .models import CasoDeAjuda,CarouselImage
+from .models import CasoDeAjuda,CarouselImage,Depoimento
 from .forms import ContatoForm 
 
 def home(request):
     casos = CasoDeAjuda.objects.all()
     carousel_images = CarouselImage.objects.filter(is_active=True)
-    return render(request, 'home.html', {'casos': casos,'carousel_images': carousel_images})
+    depoimentos = Depoimento.objects.all()
+    context = {'casos': casos, 'carousel_images': carousel_images, 'depoimentos': depoimentos}
+    return render(request, 'home.html', context)
     
 
 def quem_somos(request):
@@ -30,3 +32,5 @@ def contato(request):
         form = ContatoForm()
 
     return render(request, 'contato.html', {'form': form})
+
+
