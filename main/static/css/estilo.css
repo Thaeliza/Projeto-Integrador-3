@@ -52,3 +52,101 @@ main {
     max-width: 960px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.projeto-sarah-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 20px;
+}
+
+.titulo-doacao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 200px;
+}
+
+.titulo-doacao hr {
+    width: 30px;
+    border-top: 2px solid #ccc;
+    margin: 0;
+}
+
+.titulo-doacao h1 {
+    margin: 0;
+    color: #f19e8e;
+    /* rosa */
+    font-weight: bold;
+}
+
+.botao-doar {
+    flex: 0 0 auto;
+}
+
+.botao-doar button {
+    background-color: #e0f2f7;
+    color: #03a9f4;
+    border: 1px solid #03a9f4;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.botao-doar button:hover {
+    background-color: #c0def0;
+}
+
+.campanhas {
+    flex: 1 1 300px;
+    max-width: 500px;
+}
+
+.campanhas h2 {
+    color: #f19e8e;
+    /* rosa */
+    margin-bottom: 10px;
+}
+
+.campanhas p {
+    color: #555;
+}
+
+.icone-simples {
+    flex: 0 0 150px;
+    display: flex;
+    justify-content: flex-end;
+    /* ícone alinhado à direita */
+    align-items: center;
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #e0f2f7;
+    border: 3px solid #f08080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    color: #f08080;
+    user-select: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .projeto-sarah-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .icone-simples {
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+}

@@ -5,11 +5,9 @@ from .forms import ContatoForm
 def home(request):
     casos = CasoDeAjuda.objects.all()
     carousel_images = CarouselImage.objects.filter(is_active=True)
-    depoimentos = Depoimento.objects.all()
-    context = {'casos': casos, 'carousel_images': carousel_images, 'depoimentos': depoimentos}
-    return render(request, 'home.html', context)
+    depoimentos = Depoimento.objects.all()    
+    return render(request, 'home.html', {'casos': casos, 'carousel_images': carousel_images, 'depoimentos': depoimentos})
     
-
 def quem_somos(request):
     return render(request, 'quem_somos.html')
 

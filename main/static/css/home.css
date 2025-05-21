@@ -1,16 +1,21 @@
-.carousel-container {
+.carousel-container1,
+.carousel-container2 .carousel-container3 {
     width: 100%;
     overflow-x: hidden;
 }
 
-.carousel-track {
+.carousel-track1,
+.carousel-track2,
+.carousel-track3 {
     display: flex;
     flex-direction: row;
     white-space: nowrap;
     transition: transform 0.3s ease;
 }
 
-.card-wrapper {
+.card-wrapper1,
+.card-wrapper2,
+.card-wrapper3 {
     flex: 0 0 auto;
     width: calc(100% / 3);
     padding-right: 10px;

@@ -1,14 +1,14 @@
 footer {
     background-color: #F19E8E;
     padding: 20px;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr auto;
-    align-items: center;
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    align-items: start;
+    gap: 20px;
 }
 
 .sobre-nos h5,
@@ -17,6 +17,7 @@ footer {
 .outra-div h5 {
     margin-top: 0;
     margin-bottom: 0.5rem;
+    font-size: 1rem;
 }
 
 .sobre-nos p,
@@ -26,7 +27,7 @@ footer {
 .redes-sociais li {
     color: #000000;
     font-size: 0.875rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
     text-decoration: none;
 }
 
@@ -38,14 +39,20 @@ footer {
 .links-uteis a {
     color: #0a0a0a;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.links-uteis a:hover {
+    color: #333;
 }
 
 .logo {
-    justify-self: end;
+    justify-self: center;
+    text-align: center;
 }
 
 .logo img {
-    max-width: 120px;
+    max-width: 100px;
     border-radius: 5px;
     vertical-align: middle;
 }
@@ -62,4 +69,16 @@ hr {
     font-size: 0.875rem;
     margin-top: 10px;
     margin-bottom: 0;
+}
+
+/* Responsividade adicional para telas menores */
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .logo {
+        margin-top: 10px;
+    }
 }

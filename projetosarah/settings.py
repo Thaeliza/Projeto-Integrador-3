@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# ALLOWED_HOSTS = ['projetosarah.pythonanywhere.com']
+
+
 
 # Application definition
 
@@ -87,7 +90,7 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'ProjetoSarah$default',
 #         'USER': 'ProjetoSarah',
-#         'PASSWORD': 'password',
+#         'PASSWORD': 'admin123456',
 #         'HOST': 'ProjetoSarah.mysql.pythonanywhere-services.com',  # mesmo nome do serviço no docker-compose
 #         'PORT': '3306',
 #         'OPTIONS': {
@@ -119,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'UTC'
 

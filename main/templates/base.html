@@ -29,7 +29,7 @@
         </nav>
     </header>
 
-        <div class="carousel-container">
+        <div class="carousel-container1">
         <div class="carousel-slide">
             {% for image in carousel_images %}
             <div class="carousel-item">
@@ -45,16 +45,13 @@
         </div>
     </div>
 
-    <main>
+<main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+  {% block content %}
 
 
-    {% block content %}
+  {% endblock %}
+</main>
 
-
-
-
-    {% endblock %}
-    </main>
 
 <footer>
   <div class="footer-grid">
@@ -94,6 +91,9 @@
         <li><a href="#">Facebook</a></li>
         <li><a href="#">Instagram</a></li>
         <li><a href="#">X</a></li>
+        <li><a href="https://wa.me/5511981576013" target="_blank" class="whatsapp-link">
+        <img src="{% static '' %}" alt="WhatsApp" style="width: 24px; vertical-align: middle;">
+        Fale conosco no WhatsApp</a></li>
       </ul>
     </div>  
 
@@ -107,6 +107,6 @@
 
 </body>
     <script src="{% static 'js/script.js' %}"></script>
-    {% comment %} <script src="{% static 'js/carousel.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/carousel.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </html>
