@@ -1,42 +1,52 @@
-/* Estilos para o carrossel */
-.mySlides {
-    display: none;
+/* No seu arquivo CSS, por exemplo, carousel.css */
+
+.carousel-container {
     width: 100%;
-    /* Ajuste a largura conforme necessário */
-    height: auto;
-    /* Mantém a proporção da imagem */
+    /* Ou uma largura fixa que você deseja */
+    overflow: hidden;
+    /* CRUCIAL para esconder o que está fora da vista */
+    position: relative;
+    /* Necessário para posicionar a caption */
+    /* Adicione uma altura mínima se o carrossel não estiver aparecendo,
+       especialmente antes das imagens serem carregadas. Por exemplo: */
+    min-height: 200px;
+    /* Ajuste conforme a altura das suas imagens */
 }
 
-.img-valor img {
-    width: 100%;
-    /* Ajuste a largura conforme necessário */
-    height: auto;
-    /* Mantém a proporção da imagem */
+.carousel-slide {
+    display: flex;
+    /* CRUCIAL para que os itens fiquem lado a lado */
+    transition: transform 0.5s ease-in-out;
+    /* Para o deslizamento suave */
+    /* Não defina width aqui, o JS fará isso */
 }
 
-/* Controles de navegação */
-.prev,
-.next {
-    cursor: pointer;
+.carousel-item {
+    min-width: 100%;
+    /* Cada item ocupa 100% da largura do contêiner */
+    flex-shrink: 0;
+    /* Impede que os itens encolham */
+    box-sizing: border-box;
+    /* Inclui padding/border na largura */
+    /* Se houver padding ou margin, adicione aqui */
+}
+
+.carousel-item img {
+    width: 100%;
+    /* Garante que a imagem preencha o item */
+    height: auto;
+    /* Mantém a proporção da imagem */
+    display: block;
+    /* Remove espaçamento extra abaixo da imagem */
+}
+
+.carousel-caption {
     position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-.prev:hover,
-.next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    box-sizing: border-box;
 }

@@ -29,7 +29,7 @@
         </nav>
     </header>
 
-        <div class="carousel-container1">
+    <div class="carousel-container1">
         <div class="carousel-slide">
             {% for image in carousel_images %}
             <div class="carousel-item">
@@ -42,7 +42,9 @@
                 {% endif %}
             </div>
             {% endfor %}
-        </div>
+        </div>  
+        <button class="prev" onclick="plusSlides(-1)">❮</button>
+        <button class="next" onclick="plusSlides(1)">❯</button>
     </div>
 
 <main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
@@ -88,9 +90,8 @@
     <div class="redes-sociais">
       <h5>Redes Sociais</h5>
        <ul>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">X</a></li>
+        <li><a href="https://www.facebook.com/story.php?story_fbid=2382721211921377&id=100005505635922&rdid=IVR43GOi0UpufhmI#">Facebook</a></li>
+        <li><a href="https://www.instagram.com/institutomanaong/?igsh=Mmo2NHlhMXBqdmtv#">Instagram</a></li>
         <li><a href="https://wa.me/5511981576013" target="_blank" class="whatsapp-link">
         <img src="{% static '' %}" alt="WhatsApp" style="width: 24px; vertical-align: middle;">
         Fale conosco no WhatsApp</a></li>
@@ -106,7 +107,7 @@
 </footer>
 
 </body>
-    <script src="{% static 'js/script.js' %}"></script>
+    {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
     <script src="{% static 'js/carousel.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </html>

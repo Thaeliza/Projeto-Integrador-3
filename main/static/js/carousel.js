@@ -1,35 +1,43 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let slideIndex = 0;
-    showSlides(slideIndex);
-
-    function moveSlide(n) {
-        showSlides(slideIndex += n);
+// Primeiro carrossel - troca automática
+let slideIndex1 = 0;
+function showSlides1() {
+    const slides = document.getElementsByClassName("carousel-item");
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none"; // Esconde todos os slides
     }
+    slideIndex1++;
+    if (slideIndex1 > slides.length) { slideIndex1 = 1; } // Reinicia o índice se passar do total de slides
+    slides[slideIndex1 - 1].style.display = "block"; // Mostra o slide atual
+}
 
-    function showSlides(n) {
-        let slides = document.getElementsByClassName("carousel-item");
-        if (n >= slides.length) { slideIndex = 0 }
-        if (n < 0) { slideIndex = slides.length - 1 }
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        if (slides[slideIndex]) {
-            slides[slideIndex].style.display = "block";
-        }
+// Função para trocar slides automaticamente no primeiro carrossel
+function autoSlides1() {
+    showSlides1();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    showSlides1(); // Mostra o primeiro slide no carregamento
+    setInterval(autoSlides1, 3000); // Muda o slide a cada 3 segundos
+});
+
+// Segundo carrossel - troca automática
+let slideIndex2 = 0;
+function showSlides2() {
+    const slides = document.getElementsByClassName("mySlides");
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none"; // Esconde todos os slides
     }
+    slideIndex2++;
+    if (slideIndex2 > slides.length) { slideIndex2 = 1; } // Reinicia o índice se passar do total de slides
+    slides[slideIndex2 - 1].style.display = "block"; // Mostra o slide atual
+}
 
-    function autoSlide() {
-        moveSlide(1);
-        setTimeout(autoSlide, 3000); // Muda a cada 3 segundos
-    }
+// Função para trocar slides automaticamente no segundo carrossel
+function autoSlides2() {
+    showSlides2();
+}
 
-    document.querySelector('.prev').addEventListener('click', function () {
-        moveSlide(-1);
-    });
-
-    document.querySelector('.next').addEventListener('click', function () {
-        moveSlide(1);
-    });
-
-    autoSlide(); // Inicia a mudança automática
+document.addEventListener('DOMContentLoaded', () => {
+    showSlides2(); // Mostra o primeiro slide no carregamento
+    setInterval(autoSlides2, 3000); // Muda o slide a cada 3 segundos
 });

@@ -1,0 +1,12 @@
+.doacao-pix {
+    padding: 45px;
+    background-color: azure;
+    text-align: center;
+    justify-content: center;
+    color: #10032e;
+}
+
+#logopix {
+    height: 30%;
+    width: 30%;
+}

@@ -1,10 +1,81 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Quem Somos - [Nome da sua ONG]{% endblock %}
+{% block title %}Quem Somos - Instituto Maná{% endblock %}
 
 {% block content %}
-    <h1>Quem Somos</h1>
-    <p>Aqui você colocará a história da sua ONG, sua missão, seus valores e a equipe (opcional).</p>
+<main class="container my-5">
+    <section class="mb-5 text-center">
+        <h1 class="display-4 text-primary">Quem Somos</h1>
+        <p class="lead">Conheça a história, a missão e os valores que nos movem.</p>
+    </section>
 
-<div>
+    <section class="row align-items-center mb-5">
+        <div class="col-md-6 order-md-2">
+            <img src="{% static 'img/Imagem do WhatsApp de 2025-05-22 à(s) 08.03.27_ad8409b0.jpg' %}" class="img-fluid rounded shadow-sm mb-3" alt="Nossa História">
+        </div>
+        <div class="col-md-6 order-md-1">
+            <h2 class="h3 mb-3">Nossa História</h2>
+            <p> O <strong class="text-secondary">Instituto Mana: Fundado em 2024 na cidade de São Paulo  inscrito no CNPJ 54.892.959/0001-08 é uma organização sem fins lucrativos
+</strong> que nasceu do desejo de fazer a diferença a<span class="fw-bold">ajudar mamães em situação de vulnerabilidade</span>. Fundada em <span class="fw-bold">2024</span> por <span class="fw-bold">mim Patricia Santana de Azevedo</span>, nossa jornada começou com a simples ideia de <span class="fst-italic">apoiar e fortalecer famílias que enfrentam a vulnerabilidade social.</span>.</p>
+            <p>Desde então, temos crescido e evoluído, mas mantendo sempre a essência do que nos motivou a dar o primeiro passo: <span class="fw-bold">nosso valor central é tornar o mundo mais humano </span>.</p>
+        </div>
+    </section>
+
+    <section class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <img src="{% static 'img/Imagem do WhatsApp de 2025-05-22 à(s) 08.10.18_67a48435.jpg' %}" class="img-fluid rounded shadow-sm mb-3" alt="Missão e Visão">
+        </div>
+        <div class="col-md-6">
+            <h2 class="h3 mb-3">Nossa Missão e Visão</h2>
+            <p>Nossa <strong class="text-success">missão</strong> é <span class="fw-bold"> Promover dignidade, oferecer acolhimento e criar oportunidades para famílias em situação de vulnerabilidade. Isso é concretizado através de ações sociais, educativas e solidárias que fomentam o desenvolvimento humano e comunitário.</span>. Buscamos <span class="text-decoration-underline">construir um futuro com mais possibilidades para todos</span>, através de <span class="fw-bold">ações que trazem dignidade a pessoas com vulnerabilidade social</span>, para <span class="fst-italic">com isso as pessoas podem se sentir mais incluídas neste mundo onde existe tanta separação</span>.</p>
+        </div>
+    </section>
+
+    <section class="mb-5 bg-light p-4 rounded shadow-sm">
+        <h2 class="h3 mb-3 text-center">Nossos Valores</h2>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 border-primary">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary"><i class="bi bi-lightbulb-fill me-2"></i>[Valor 1]</h4>
+                        <p class="card-text">[Pequena descrição de como este valor se manifesta na prática].</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 border-success">
+                    <div class="card-body">
+                        <h4 class="card-title text-success"><i class="bi bi-hand-thumbs-up-fill me-2"></i>[Valor 2]</h4>
+                        <p class="card-text">[Pequena descrição].</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 border-info">
+                    <div class="card-body">
+                        <h4 class="card-title text-info"><i class="bi bi-people-fill me-2"></i>[Valor 3]</h4>
+                        <p class="card-text">[Pequena descrição].</p>
+                    </div>
+                </div>
+            </div>
+            {% comment %} Adicione mais cards de valores se precisar, copiando e adaptando um dos acima {% endcomment %}
+        </div>
+    </section>
+
+    {% comment %} <section class="row mb-5">
+        <div class="col-12">
+            <h2 class="h3 mb-3 text-center">O Que Nos Torna Diferentes</h2>
+            <p class="text-center">No mercado de <strong class="text-danger">[sua área de atuação]</strong>, a <strong class="text-secondary">[Nome da Sua Empresa]</strong> se destaca por <span class="fw-bold">[mencione 1-2 diferenciais específicos, como: abordagem personalizada, tecnologia de ponta, equipe altamente qualificada, foco na sustentabilidade, suporte ao cliente excepcional, etc.]</span>.</p>
+            <p class="text-center">Acreditamos que nosso foco em <span class="fw-bold">[reforce um ponto chave que você faz melhor que a concorrência]</span> é o que nos impulsiona a ir além a cada dia, garantindo a excelência em tudo que fazemos.</p>
+        </div>
+    </section>
+
+    <section class="text-center py-5 bg-primary text-white rounded">
+        <h2 class="h3 mb-3">Venha Construir o Futuro Conosco</h2>
+        <p class="lead">Convidamos você a fazer parte da nossa jornada. o <strong class="text-warning">Instituto Maná</strong> está sempre de portas abertas para construir um futuro onde <span class="fw-bold">o mundo se torna mais humano e empata</span>.</p>
+        <p>Agradecemos a confiança e esperamos vê-lo em breve!</p>
+        <a href="{% url 'contato' %}" class="btn btn-lg btn-light mt-3">Entre em Contato</a>
+    </section> {% endcomment %}
+</main>
 {% endblock %}

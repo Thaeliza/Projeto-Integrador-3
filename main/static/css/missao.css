@@ -1,0 +1,72 @@
+/* Centraliza o conteúdo do main */
+main {
+    width: 100%;
+    max-width: 1200px;
+    /* Limita a largura máxima */
+    margin: 0 auto;
+    /* Centraliza o conteúdo */
+    padding: 20px;
+    /* Espaçamento interno */
+}
+
+/* Estilos específicos para a página de Missão */
+.pagina-missao {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.pagina-missao .row {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagina-missao .img-mission {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.pagina-missao .text-mission {
+    flex: 2;
+}
+
+.pagina-missao h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+.pagina-missao p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Ajuste para as imagens e textos */
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.img-mission {
+    flex: 2;
+    padding: 5px;
+    width: 100%;
+    /* Aumenta um pouco o tamanho das imagens */
+    align-items: center;
+}
+
+.text-mission {
+    flex: 2;
+    margin: 10px;
+    width: 60%;
+    align-items: center;
+}
+
+.img-mission img {
+    width: 100%;
+    /* Mantém as imagens responsivas */
+    border-radius: 10px;
+    height: auto;
+}

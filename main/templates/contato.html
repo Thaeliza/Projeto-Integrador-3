@@ -1,21 +1,92 @@
-{% extends "base.html" %}
+{% extends 'base.html' %} {# Extende seu template base #}
+{% load static %} {# Carrega a tag 'static' para arquivos estáticos #}
 
-{% load static %}
+{% block title %}Contato - Istituto Maná{% endblock %} {# Define o título da página #}
 
-<title>{% block title %}Fale Conosco{% endblock %}</title>
+{% block content %} {# Inicia o bloco de conteúdo #}
+<main class="container my-5">
+    {# Seção de Título e Chamada #}
+    <section class="mb-5 text-center">
+        <h1 class="display-4 text-info">Entre em Contato</h1>
+        <p class="lead">Tem dúvidas, sugestões ou quer fazer uma parceria? Fale conosco!</p>
+    </section>
 
-{% block content %}
+    <div class="row g-4">
+        {# Coluna do Formulário de Contato #}
+        <div class="col-lg-7">
+            <h2 class="h4 mb-4 text-info">Envie-nos uma Mensagem</h2>
+            <p class="text-muted">Preencha o formulário abaixo e retornaremos o mais breve possível.</p>
 
-<link rel="stylesheet" href="{%static 'css/contato.css' %}" />
+            {# Formulário de Contato Django #}
+            {# ATENÇÃO: Este é um formulário HTML básico. Você precisará de um Django Form no seu views.py #}
+            <form method="post">
+                {% csrf_token %} {# MUITO IMPORTANTE para segurança CSRF no Django #}
+                
+                {# Renderiza os campos do formulário Django - ajuste conforme seu form.py #}
+                {# Exemplo de como você renderizaria campos individualmente ou todos juntos: #}
+                
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
 
+                <button type="submit" class="btn btn-info btn-lg">Enviar Mensagem <i class="bi bi-send-fill ms-2"></i></button>
+            </form>
+            {# Mensagem de sucesso (opcional) #}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
 
-<div class="form-faleconosco">
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Enviar">
-    </form>
-</div>
+        {# Coluna de Informações de Contato e Mapa #}
+        <div class="col-lg-5">
+            <h2 class="h4 mb-4 text-info">Nossos Contatos</h2>
+            <ul class="list-unstyled">
+                <li class="mb-3">
+                    <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                    <strong>Endereço:</strong> [Seu Endereço Completo, Ex: Rua Exemplo, 123 - Centro, Cidade - Estado, CEP]
+                </li>
+                <li class="mb-3">
+                    <i class="bi bi-telephone-fill text-primary me-2"></i>
+                    <strong>Telefone:</strong> <a href="tel:[Seu Telefone com DDD]" class="text-decoration-none text-dark">[Seu Telefone com DDD]</a>
+                </li>
+                <li class="mb-3">
+                    <i class="bi bi-whatsapp text-primary me-2"></i>
+                    <strong>WhatsApp:</strong> <a href="https://wa.me/[Seu WhatsApp com DDD e sem caracteres especiais]" target="_blank" class="text-decoration-none text-dark">[Seu WhatsApp com DDD]</a>
+                </li>
+                <li class="mb-3">
+                    <i class="bi bi-envelope-fill text-primary me-2"></i>
+                    <strong>E-mail:</strong> <a href="mailto:[Seu Email de Contato]" class="text-decoration-none text-dark">[Seu Email de Contato]</a>
+                </li>
+                <li class="mb-3">
+                    <i class="bi bi-clock-fill text-primary me-2"></i>
+                    <strong>Horário de Atendimento:</strong> [Seu Horário de Atendimento, Ex: Seg-Sex: 9h-18h]
+                </li>
+            </ul>
 
-
+            {# Opcional: Mapa Incorporado (Google Maps, OpenStreetMap, etc.) #}
+            <h2 class="h4 mt-5 mb-3 text-info">Onde Estamos</h2>
+            <div class="ratio ratio-16x9 rounded shadow-sm">
+                {# Insira o código do mapa incorporado aqui. Exemplo do Google Maps: #}
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.472948633762!2d-46.83296238440748!3d-23.551717366367523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf02c38d5f303f%3A0xc0c8f5d0263f3a8b!2sCarapicu%C3%ADba%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1678912345678!5m2!1spt-BR!2sbr" 
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                {# Substitua o 'src' pelo código de incorporação do seu endereço! #}
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock content %}

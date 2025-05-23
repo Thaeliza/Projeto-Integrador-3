@@ -1,5 +1,23 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %} 
 {% load static %}
-    
-  
+
+<title>{% block title %}Pagina Administração{% endblock %}</title>
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+
+{% if error %}
+  <p>{{ error }}</p>
+{% endif %}
+<form class="login-form" method="post">
+  {% csrf_token %}
+  <label for="username">Usuário:</label>
+  <input type="text" id="username" name="username">
+  <label for="password">Senha:</label>
+  <input type="password" id="password" name="password">
+  <button type="submit">Login</button>
+</form>
+
+
+{% endblock content %}
