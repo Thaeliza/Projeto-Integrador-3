@@ -14,8 +14,8 @@ def home(request):
 def quem_somos(request):
     return render(request, 'quem_somos.html')
 
-def como_ajudamos(request):
-    return render(request, 'como_ajudamos.html')
+def nossas_acoes(request):
+    return render(request, 'nossas_acoes.html')
 
 def preciso_de_ajuda(request):
     return render(request, 'preciso_de_ajuda.html')
@@ -23,8 +23,6 @@ def preciso_de_ajuda(request):
 def como_ajudar(request):
     return render(request, 'como_ajudar.html')
 
-def doacao(request):
-    return render(request, 'doacao.html')
 
 def contato(request):
     if request.method == 'POST':
@@ -55,19 +53,3 @@ def cadastro(request):
   else:
         return render(request, 'cadastro.html')
     
-
-# def lista_acoes(request):
-#     # Pega todas as ações ativas, ordenadas pela data de publicação (mais recente primeiro)
-#     acoes = Acao.objects.filter(ativa=True).order_by('-data_publicacao')
-#     context = {
-#         'acoes': acoes
-#     }
-#     return render(request, 'meuapp/lista_acoes.html', context) # Renderiza seu template com as ações
-
-# def detalhe_acao(request, slug):
-#     # Pega uma ação específica pelo slug, ou retorna 404 se não encontrar
-#     acao = get_object_or_404(Acao, slug=slug, ativa=True)
-#     context = {
-#         'acao': acao
-#     }
-#     return render(request, 'meuapp/detalhe_acao.html', context)
