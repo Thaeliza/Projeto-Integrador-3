@@ -5,51 +5,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Seu Site{% endblock %}</title>
+    <title>{% block title %}Instituto Maná{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
-    <link rel="stylesheet" href="{% static 'css/contato.css' %}">
-</head>
-<body>
- 
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+{% block extra_css %}
+
+{% endblock %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+    
+</head>
+
+<body>
 
     <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Início</a></li>
-                <li><a href="{% url 'quem_somos' %}">Quem Somos</a></li>
-                <li><a href="{% url 'nossas_acoes' %}">Nossas Ações</a></li>
-                <li><a href="{% url 'transparencia' %}">Transparência</a></li>
-                <li><a href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
-                <li><a href="{% url 'contato' %}">Contato</a></li>
-                <li><a href="{% url 'agenda_google_view' %}">Agenda</a></li>
-                <li><a href="{% url 'doacao' %}">Doação</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"> {# Added Bootstrap classes for navigation #}
+            <div class="container"> {# Added container to control width #}
+                <a class="navbar-brand" href="{% url 'home' %}">Projeto Sarah</a> {# Optional: Add a brand/logo #}
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto"> {# ms-auto pushes items to the right #}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'quem_somos' %}">Quem Somos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'nossas_acoes' %}">Nossas Ações</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'transparencia' %}">Transparência</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'contato' %}">Contato</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'agenda_google_view' %}">Agenda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'doacao' %}">Doação</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
-    {# Carrossel Principal: Este é o primeiro carrossel, global em todas as páginas #}
-    <div class="carousel-container1">
-        <div class="carousel-slide">
+    {# Bootstrap Carousel: This is the primary carousel, global across all pages #}
+  <div class="carousel-item {% if forloop.first %}active{% endif %}">
+    <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.title }}">
+    {% if image.title or image.description %}
+    <div class="carousel-caption"> {# REMOVIDO d-none d-md-block #}
+        <h5>{{ image.title }}</h5>
+        <p>{{ image.description }}</p>
+    </div>
+    {% endif %}
+</div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <div class="carousel-indicators"> {# Optional: Add indicators for navigation #}
             {% for image in carousel_images %}
-            <div class="carousel-item">
-                <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                {% if image.title or image.description %}
-                <div class="carousel-caption">
-                    <h3>{{ image.title }}</h3>
-                    <p>{{ image.description }}</p>
-                </div>
-                {% endif %}
-            </div>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
             {% endfor %}
         </div>
     </div>
 
-<main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+<main class="main-content">
     {% block content %}
 
     {% endblock %}
@@ -69,22 +89,22 @@
         <div class="links-uteis">
             <h5>Links Úteis</h5>
             <ul>
-                <li><a href="#">Página Inicial</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Contato</a></li>
-                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="{% url 'home' %}">Página Inicial</a></li> {# Changed to use Django URL #}
+                <li><a href="#">Serviços</a></li> {# Placeholder, update as needed #}
+                <li><a href="{% url 'contato' %}">Contato</a></li> {# Changed to use Django URL #}
+                <li><a href="#">Política de Privacidade</a></li> {# Placeholder, update as needed #}
             </ul>
         </div>
 
         <div class="links-uteis">
             <h5>Mapa do Site</h5>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Quem somos</a></li>
-                <li><a href="#">Nossas Ações</a></li>
-                <li><a href="#">Transparência</a></li>
-                <li><a href="#">Como Ajudar</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'quem_somos' %}">Quem somos</a></li>
+                <li><a href="{% url 'nossas_acoes' %}">Nossas Ações</a></li>
+                <li><a href="{% url 'transparencia' %}">Transparência</a></li>
+                <li><a href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
             </ul>
         </div>
 
@@ -108,11 +128,11 @@
 
 </footer>
 
-{# JavaScript Global: Scripts que se aplicam a TODO o site #}
-<script src="{% static 'js/carousel.js' %}" defer></script> {# Este é para o carrossel principal #}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous" defer></script>
+{# JavaScript Global: Scripts that apply to the ENTIRE site #}
+{# Removed old custom carousel.js, Bootstrap handles it. #}
+{# Bootstrap's JS bundle is already included in the <head>, no need for a duplicate here #}
 
-{# Bloco para JavaScript ESPECÍFICO de páginas filhas #}
+{# Block for SPECIFIC JavaScript of child pages #}
 {% block extra_js %}{% endblock %}
 
 </body>

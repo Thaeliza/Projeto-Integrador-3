@@ -3,7 +3,7 @@
 {% block title %}Página Inicial - Instituto Maná{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" /> {# CSS específico da home #}
+   
 {% endblock %}
 
 {% block content %}
@@ -14,82 +14,121 @@
     </div>
 </section>
 
-{# Seção de Notícias com seu carrossel #}
-<section class="noticias-section">
-    <h1>Notícias</h1>
-    <p>Notícias de eventos e projetos:</p>
+<main class="main-content">
 
-    <div class="carousel-container2"> {# Contêiner para o carrossel de Notícias #}
-        <div class="carousel-track2">
+{# Seção de Notícias com Carrossel Bootstrap #}
+<section class="my-5"> {# Adicionado margem do Bootstrap para espaçamento #}
+    <h1 class="text-center mb-4">Notícias</h1> {# Título centralizado, margem inferior #}
+    <p class="text-center mb-5">Notícias de eventos e projetos:</p>
+
+    {# Carrossel Bootstrap para Notícias #}
+    <div id="noticiasCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
             {% for caso in casos %}
-            <div class="card-wrapper2">
-                <div class="card">
-                    {% if caso.imagem %}
-                    <img src="{{ caso.imagem.url }}" class="card-img-top" alt="{{ caso.titulo }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ caso.titulo }}</h5>
-                        <p class="card-text">{{ caso.descricao }}</p>
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="d-flex justify-content-center"> {# Cards centralizados #}
+                    <div class="card" style="width: 20rem;"> {# Card Bootstrap, ajuste a largura conforme necessário #}
+                        {% if caso.imagem %}
+                        <img src="{{ caso.imagem.url }}" class="card-img-top" alt="{{ caso.titulo }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ caso.titulo }}</h5>
+                            <p class="card-text">{{ caso.descricao }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <button class="carousel-prev-btn2">❮</button>
-        <button class="carousel-next-btn2">❯</button>
+        <button class="carousel-control-prev" type="button" data-bs-target="#noticiasCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#noticiasCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+        {# Indicadores Opcionais #}
+        <div class="carousel-indicators">
+            {% for caso in casos %}
+            <button type="button" data-bs-target="#noticiasCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
-<section class="projeto-sarah-section">
+---
+
+<section class="projeto-sarah-section my-5 text-center"> {# Adicionado espaçamento do Bootstrap e conteúdo centralizado #}
     <div class="titulo-doacao">
-        <hr>
-        <h1>PROJETO SARAH</h1>
+        <hr class="w-75 mx-auto my-4"> {# HR centralizado e mais estreito #}
+        <h1 class="display-4">PROJETO SARAH</h1> {# Título maior #}
     </div>
 
-    <div class="botao-doar">
-        <button onclick="location.href='{% url 'doacao' %}'">DOE AGORA!</button>
+    <div class="botao-doar my-4">
+        <button class="btn btn-lg btn-primary" onclick="location.href='{% url 'doacao' %}'">DOE AGORA!</button> {# Estilo de botão do Bootstrap #}
     </div>
 
     <div class="campanhas">
-        <h2>Campanhas de Arrecadação</h2>
-        <p>Use this space to highlight your most popular services. You can also use this para seus produtos principais.</p>
+        <h2 class="mb-3">Campanhas de Arrecadação</h2>
+        <p class="lead">Use este espaço para destacar seus serviços mais populares. Você também pode usar isso para seus produtos principais.</p>
     </div>
 
-    <div class="icone-simples">
-        <div class="icon-circle">
+    <div class="icone-simples mt-5">
+        <div class="icon-circle mx-auto p-4 border border-primary rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px; font-size: 3rem;">
             <span>💖</span>
         </div>
     </div>
 </section>
 
-{# Seção de Depoimentos com seu carrossel #}
-<section class="depoimentos-section">
-    <h1>Depoimentos</h1>
-    <p>Conheça algumas histórias de como estamos ajudando meninas grávidas:</p>
+---
 
-    <div class="carousel-container3"> {# Contêiner para o carrossel de Depoimentos #}
-        <div class="carousel-track3">
+{# Seção de Depoimentos com Carrossel Bootstrap #}
+<section class="my-5"> {# Adicionado margem do Bootstrap para espaçamento #}
+    <h1 class="text-center mb-4">Depoimentos</h1> {# Título centralizado, margem inferior #}
+    <p class="text-center mb-5">Conheça algumas histórias de como estamos ajudando meninas grávidas:</p>
+
+    {# Carrossel Bootstrap para Depoimentos #}
+    <div id="depoimentosCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
             {% for depoimento in depoimentos %}
-            <div class="card-wrapper3">
-                <div class="card">
-                    {% if depoimento.imagem %}
-                    <img src="{{ depoimento.imagem.url }}" class="card-img-top" alt="{{ depoimento.titulo }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ depoimento.titulo }}</h5>
-                        <p class="card-text">{{ depoimento.texto }}</p>
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="d-flex justify-content-center"> {# Cards centralizados #}
+                    <div class="card" style="width: 20rem;"> {# Card Bootstrap, ajuste a largura conforme necessário #}
+                        {% if depoimento.imagem %}
+                        <img src="{{ depoimento.imagem.url }}" class="card-img-top" alt="{{ depoimento.titulo }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ depoimento.titulo }}</h5>
+                            <p class="card-text">{{ depoimento.texto }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <button class="carousel-prev-btn3">❮</button>
-        <button class="carousel-next-btn3">❯</button>
+        <button class="carousel-control-prev" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+        {# Indicadores Opcionais #}
+        <div class="carousel-indicators">
+            {% for depoimento in depoimentos %}
+            <button type="button" data-bs-target="#depoimentosCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
     </div>
 </section>
-    
+
+
+</main>
+
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'js/home_scripts.js' %}" defer></script> {# JS para os carrosséis da home #}
+    {# Removido home_scripts.js, pois o JS do Bootstrap lida com os carrosséis #}
 {% endblock %}

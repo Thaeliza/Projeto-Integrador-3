@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from .models import CasoDeAjuda
+from django.shortcuts import render, redirect
+from .models import CasoDeAjuda,Acao
 from main.models import CarouselImage  # ou o nome da sua app
-
-
-from django.shortcuts import render
-from .models import CarouselImage
+from django.contrib import messages # Importe o módulo messages
+from django.core.mail import send_mail
+from django.conf import settings # Para acessar configurações do settings.py (email)
+from .forms import ContatoForm # Importe seu formulário
 
 def home(request):
     home1_images = CarouselImage.objects.filter(category='home1')
@@ -13,7 +13,6 @@ def home(request):
         'carousel_home1_images': home1_images,
         'carousel_home2_images': home2_images,
     })
-
 
 
 def base_context(request):
@@ -31,8 +30,14 @@ def quem_somos(request):
     }
     return render(request, 'quem_somos.html', context) # Ajuste o caminho do template
 
+
 def nossas_acoes(request):
-    return render(request, 'nossas_acoes.html')
+    # Busca todas as ações do banco de dados, ordenadas pela data de publicação (mais recentes primeiro)
+    acoes = Acao.objects.all()
+    context = {
+        'acoes': acoes,  # 'acoes' é a variável que o template vai iterar
+    }
+    return render(request, 'nossas_acoes.html', context)
 
 def transparencia(request):
     return render(request, 'transparencia.html')
@@ -52,12 +57,6 @@ def preciso_de_ajuda(request):
 def como_ajudar(request):
     return render(request, 'como_ajudar.html')
 
-from django.shortcuts import render, redirect
-from django.contrib import messages # Importe o módulo messages
-from django.core.mail import send_mail
-from django.conf import settings # Para acessar configurações do settings.py (email)
-
-from .forms import ContatoForm # Importe seu formulário
 
 def contato(request):
     if request.method == 'POST':
@@ -89,15 +88,5 @@ def contato(request):
     }
     return render(request, 'contato.html', context)
 
-# seu_app/views.py
-from django.shortcuts import render
-from .models import Acao  # Importe seu modelo Acao
 
-def lista_acoes(request):
-    # Busca todas as ações do banco de dados, ordenadas pela data de publicação (mais recentes primeiro)
-    acoes = Acao.objects.all().order_by('-data_publicacao') 
-    context = {
-        'acoes': acoes,  # 'acoes' é a variável que o template vai iterar
-    }
-    return render(request, 'seu_app/nossas_acoes.html', context)
 

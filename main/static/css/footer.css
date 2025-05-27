@@ -1,7 +1,7 @@
 /* --- Variáveis de Cor (se você as usa, é uma boa prática centralizar) --- */
 /* Estas variáveis deveriam idealmente vir do estilo.css se forem as mesmas globais */
 :root {
-    --primary-rose: #c11244;
+    --primary-rose: #320a1c;
     /* Rosa principal do tema */
     --dark-rose: #8b0c30;
     /* Rosa mais escuro para hover, etc. */

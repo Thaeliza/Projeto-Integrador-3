@@ -60,65 +60,17 @@ header {
     }
 }
 
-.main-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    box-sizing: border-box;
-    padding: 0 20px;
-}
-
-.main-nav ul li {
-    display: inline-block;
-    margin: 0 20px;
-    position: relative;
-}
-
-.main-nav ul li a {
-    color: var(--text-light);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-    padding: 5px 0;
-    display: block;
-}
-
-.main-nav ul li a::after {
-    content: '';
-    display: block;
-    margin: 4px auto 0;
-    width: 0;
-    height: 2px;
-    background: var(--text-light);
-    transition: width 0.3s ease;
-}
-
-.main-nav ul li a:hover,
-.main-nav ul li a:focus {
-    color: var(--primary-light);
-}
-
-.main-nav ul li a:hover::after,
-.main-nav ul li a:focus::after {
-    width: 100%;
-}
 
 /* --- Estilos do Conteúdo Principal (tag <main>) --- */
-main {
+.main-content {
     flex-grow: 1;
-    padding: 0;
+    padding: 20;
     /* Remove padding do main. O container interno terá padding. */
     background-color: rgba(255, 255, 255, 0.9);
     /* Fundo para o conteúdo do main */
     margin: 40px auto;
     /* Margem vertical e centraliza o main */
-    max-width: 960px;
+    max-width: 1200px;
     /* Largura máxima para a área do main. Ajuste ou remova se quiser largura total. */
     box-shadow: 0 8px 20px var(--shadow-color);
     border-radius: 12px;

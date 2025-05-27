@@ -4,66 +4,66 @@
     width: 100%;
     overflow: hidden;
     margin-bottom: 20px;
-    
-
-.carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    position: relative;
-}
-
-.carousel-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.carousel-caption {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-align: center;
-    max-width: 80%;
-}
-
-.carousel-caption h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 1.5em;
-}
-
-.carousel-caption p {
-    margin: 0;
-    font-size: 1em;
-}
 
 
-.carousel-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-}
+    .carousel-slide {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
 
-.carousel-prev-btn {
-    left: 10px;
-}
+    .carousel-item {
+        min-width: 100%;
+        box-sizing: border-box;
+        position: relative;
+    }
 
-.carousel-next-btn {
-    right: 10px;
-} */
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .carousel-caption {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        max-width: 80%;
+    }
+
+    .carousel-caption h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 1.5em;
+    }
+
+    .carousel-caption p {
+        margin: 0;
+        font-size: 1em;
+    }
+
+
+    .carousel-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .carousel-prev-btn {
+        left: 10px;
+    }
+
+    .carousel-next-btn {
+        right: 10px;
+    } */
