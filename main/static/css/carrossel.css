@@ -1,11 +1,10 @@
 /* Estilos para o Carrossel Principal */
-.carousel-container1 {
+/* .carousel-container1 {
     position: relative;
     width: 100%;
     overflow: hidden;
     margin-bottom: 20px;
-    /* Espaço abaixo do carrossel */
-}
+    
 
 .carousel-slide {
     display: flex;
@@ -48,7 +47,7 @@
     font-size: 1em;
 }
 
-/* Navegação do carrossel (opcional, pode ser adicionado com JS) */
+
 .carousel-nav-btn {
     position: absolute;
     top: 50%;
@@ -67,4 +66,4 @@
 
 .carousel-next-btn {
     right: 10px;
-}
+} */

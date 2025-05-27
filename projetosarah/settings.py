@@ -72,6 +72,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'projetosarah.wsgi.application'
 
+# settings.py
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.seuservidor.com'
+# EMAIL_PORT = 587 
+# EMAIL_USE_TLS = True 
+# EMAIL_HOST_USER = 'seu_email@seuservidor.com'
+# EMAIL_HOST_PASSWORD = 'sua_senha_de_email'
+# DEFAULT_FROM_EMAIL = 'seu_email@seuservidor.com'
+# EMAIL_RECIPIENT = 'email_que_recebera_as_mensagens_do_site@exemplo.com'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

@@ -1,0 +1,222 @@
+/* seu_app/static/css/home.css */
+
+/* Estilos para a seção de notícias */
+.noticias-section {
+    background-color: #f8bbd0;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para a seção de depoimentos */
+.depoimentos-section {
+    background-color: #f8bbd0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* --- Estilos para os carrosséis .carousel-container2 e .carousel-container3 --- */
+/* Estes estilos devem permitir a visualização de múltiplos itens e o movimento lateral */
+.carousel-container2,
+.carousel-container3 {
+    position: relative;
+    /* Para posicionar botões de navegação */
+    overflow: hidden;
+    /* Esconde o que está fora da vista */
+    padding: 20px;
+    /* Adiciona padding interno */
+}
+
+.carousel-track2,
+.carousel-track3 {
+    display: flex;
+    /* Essencial para os itens ficarem lado a lado */
+    transition: transform 0.5s ease-in-out;
+    /* Transição suave */
+    /* Remove white-space: nowrap; - agora o JS e a largura dos cards controlam */
+}
+
+.card-wrapper2,
+.card-wrapper3 {
+    flex: 0 0 auto;
+    /* Não cresce nem encolhe, largura fixa */
+    box-sizing: border-box;
+    /* Inclui padding na largura */
+    padding-right: 10px;
+    /* Espaçamento entre os cards */
+    /* A largura será definida pelo JS via calculo ou CSS media query */
+    width: calc(100% / 3);
+    /* Padrão para 3 cards por linha no desktop */
+}
+
+/* Estilos para os botões de navegação */
+.carousel-container2 .carousel-prev-btn2,
+.carousel-container2 .carousel-next-btn2,
+.carousel-container3 .carousel-prev-btn3,
+.carousel-container3 .carousel-next-btn3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-container2 .carousel-prev-btn2,
+.carousel-container3 .carousel-prev-btn3 {
+    left: 10px;
+}
+
+.carousel-container2 .carousel-next-btn2,
+.carousel-container3 .carousel-next-btn3 {
+    right: 10px;
+}
+
+.carousel-container2 button:disabled,
+.carousel-container3 button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Estilos para os cards (pode já estar em 'estilo.css' se forem globais) */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    /* Espaçamento entre os cards na vertical */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Estilos para a seção Projeto Sarah (seus estilos originais) */
+.projeto-sarah-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.titulo-doacao hr {
+    width: 50px;
+    border: 1px solid #ccc;
+    margin: 10px auto 20px auto;
+}
+
+.titulo-doacao h1 {
+    font-size: 2.5rem;
+    color: #c2185b;
+    margin-bottom: 20px;
+}
+
+.botao-doar button {
+    background-color: #e91e63;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botao-doar button:hover {
+    background-color: #ad1457;
+}
+
+.campanhas {
+    margin-top: 30px;
+}
+
+.campanhas h2 {
+    font-size: 1.8rem;
+    color: #444;
+}
+
+.icone-simples {
+    margin-top: 30px;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #ffe082;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsividade para carrosséis da home */
+@media (max-width: 768px) {
+
+    .card-wrapper2,
+    .card-wrapper3 {
+        width: calc(100% / 2 - 10px);
+        /* 2 cards por linha em telas médias */
+    }
+
+    .carousel-container2 .carousel-prev-btn2,
+    .carousel-container2 .carousel-next-btn2,
+    .carousel-container3 .carousel-prev-btn3,
+    .carousel-container3 .carousel-next-btn3 {
+        padding: 8px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .card-wrapper2,
+    .card-wrapper3 {
+        width: 100%;
+        /* 1 card por linha em telas pequenas */
+        padding-right: 0;
+        /* Remove espaçamento à direita */
+        margin-bottom: 15px;
+        /* Adiciona espaçamento vertical */
+    }
+
+    .carousel-track2,
+    .carousel-track3 {
+        /* white-space: normal; - não é necessário se flex-wrap estiver em container e largura 100% */
+        flex-wrap: nowrap;
+        /* A largura 100% fará com que eles fiquem em uma linha se não houver overflow escondido */
+    }
+}

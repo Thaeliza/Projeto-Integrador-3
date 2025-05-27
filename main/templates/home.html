@@ -1,136 +1,95 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}Página Inicial - Instituto Maná{% endblock %}
 
 {% block extra_css %}
-    {# Nenhum CSS customizado específico para home.html necessário com Bootstrap puro #}
-    <style>
-        /* Apenas se o círculo de ícone rosa for um elemento de marca muito específico e não houver um componente Bootstrap para ele */
-        .icon-circle-mana {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: #ff69b4; /* Rosa */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-            margin: 2rem auto; /* Centraliza o ícone */
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" /> {# CSS específico da home #}
 {% endblock %}
 
 {% block content %}
-<div class="container my-5"> {# Envelope todo o conteúdo da página no .container com margem vertical #}
 
-    {# Seção Projeto Sarah #}
-    <section class="mb-5"> {# Margem inferior #}
-        <div class="text-center mb-4"> {# Centraliza o texto e adiciona margem inferior #}
-            {# Linha horizontal usando classes de borda do Bootstrap #}
-            <hr class="w-25 mx-auto border-success border-3 opacity-100"> 
-            <h1 class="display-4 fw-bold text-dark">PROJETO SARAH</h1> {# Título grande, negrito, texto escuro #}
-        </div>
-        <div class="text-center mb-5"> {# Centraliza o botão e adiciona margem inferior #}
-            <button onclick="location.href='{% url 'doacao' %}'" class="btn btn-success btn-lg shadow-sm">DOE AGORA!</button> {# Botão verde grande com sombra #}
-        </div>
+<section>
+    <div class="hero">
+        <img src="{% static 'img/imagem-gravida-projetosarah.jpg' %}" alt="Imagem de destaque" class="img-fluid">
+    </div>
+</section>
 
-        {# Seção de Campanhas em Destaque #}
-        <div class="row align-items-center justify-content-center py-4"> {# Linha, alinha itens verticalmente, centraliza, padding vertical #}
-            <div class="col-md-6 order-md-2 mb-3 mb-md-0"> {# Coluna para imagem, ordem reversa em md+, margem inferior #}
-                <img src="{% static 'img/campanha_destaque.jpg' %}" class="img-fluid rounded shadow" alt="Campanha de Arrecadação em Destaque"> {# Imagem responsiva, arredondada, sombra #}
-            </div>
-            <div class="col-md-6 order-md-1 text-center text-md-start"> {# Coluna para texto, ordem normal em md+, alinhamento responsivo #}
-                <h2 class="display-5 fw-bold text-dark mb-3">Sua Ajuda Transforma Vidas!</h2> {# Título grande, negrito, texto escuro #}
-                <p class="lead text-secondary mb-4"> {# Texto principal, cor secundária, margem inferior #}
-                    No Instituto Maná, cada doação se converte em esperança e apoio real para mães e bebês em situação de vulnerabilidade.
-                    Junte-se a nós e faça parte desta corrente de solidariedade!
-                </p>
-                <a href="{% url 'doacao' %}" class="btn btn-success btn-lg"> {# Botão verde grande #}
-                    <i class="bi bi-hand-heart-fill me-2"></i>Conheça Nossas Campanhas {# Ícone Bootstrap com margem direita #}
-                </a>
-            </div>
-        </div>
+{# Seção de Notícias com seu carrossel #}
+<section class="noticias-section">
+    <h1>Notícias</h1>
+    <p>Notícias de eventos e projetos:</p>
 
-        <div class="text-center"> {# Centraliza o ícone #}
-            <div class="icon-circle-mana"> {# Classe customizada apenas para o ícone rosa #}
-                <span>💖</span>
-            </div>
-        </div>
-    </section>
-
-    <hr class="my-5"> {# Linha divisória com margem vertical #}
-
-    {# Carrossel de Notícias: AGORA TOTALMENTE BOOTSTRAP #}
-    <section class="my-5"> {# Margem vertical #}
-        <h1 class="text-center display-5 fw-bold mb-3">Notícias</h1> {# Título centralizado, grande, negrito #}
-        <p class="text-center text-secondary mb-4">Notícias de eventos e projetos:</p> {# Descrição centralizada #}
-        <div id="carouselNoticiasHome" class="carousel slide carousel-fade shadow-sm rounded" data-bs-ride="carousel"> {# Carrossel com transição fade, sombra e borda arredondada #}
-            <div class="carousel-inner">
-                {% for caso in casos %} {# Iterando sobre os casos/notícias #}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+    <div class="carousel-container2"> {# Contêiner para o carrossel de Notícias #}
+        <div class="carousel-track2">
+            {% for caso in casos %}
+            <div class="card-wrapper2">
+                <div class="card">
                     {% if caso.imagem %}
-                    <img src="{{ caso.imagem.url }}" class="d-block w-100 img-fluid rounded" alt="{{ caso.titulo }}"> {# Imagem responsiva, arredondada #}
+                    <img src="{{ caso.imagem.url }}" class="card-img-top" alt="{{ caso.titulo }}">
                     {% endif %}
-                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3"> {# Legenda escura, opacidade, arredondada, padding #}
-                        <h5 class="fw-bold">{{ caso.titulo }}</h5> {# Título da legenda, negrito #}
-                        <p class="text-white-50">{{ caso.descricao_breve }}</p> {# Descrição da legenda, texto branco semi-transparente #}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ caso.titulo }}</h5>
+                        <p class="card-text">{{ caso.descricao }}</p>
                     </div>
                 </div>
-                {% endfor %}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticiasHome" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticiasHome" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
-            <div class="carousel-indicators"> {# Indicadores de slide #}
-                {% for caso in casos %}
-                    <button type="button" data-bs-target="#carouselNoticiasHome" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-    </section>
+        <button class="carousel-prev-btn2">❮</button>
+        <button class="carousel-next-btn2">❯</button>
+    </div>
+</section>
 
-    <hr class="my-5"> {# Linha divisória com margem vertical #}
+<section class="projeto-sarah-section">
+    <div class="titulo-doacao">
+        <hr>
+        <h1>PROJETO SARAH</h1>
+    </div>
 
-    {# Carrossel de Depoimentos: AGORA TOTALMENTE BOOTSTRAP #}
-    <section class="my-5"> {# Margem vertical #}
-        <h1 class="text-center display-5 fw-bold mb-3">Depoimentos</h1> {# Título centralizado, grande, negrito #}
-        <p class="text-center text-secondary mb-4">Conheça algumas histórias de como estamos ajudando meninas grávidas:</p> {# Descrição centralizada #}
-        <div id="carouselDepoimentosHome" class="carousel slide carousel-fade shadow-sm rounded" data-bs-ride="carousel"> {# Carrossel com transição fade, sombra e borda arredondada #}
-            <div class="carousel-inner">
-                {% for depoimento in depoimentos %} {# Iterando sobre os depoimentos #}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+    <div class="botao-doar">
+        <button onclick="location.href='{% url 'doacao' %}'">DOE AGORA!</button>
+    </div>
+
+    <div class="campanhas">
+        <h2>Campanhas de Arrecadação</h2>
+        <p>Use this space to highlight your most popular services. You can also use this para seus produtos principais.</p>
+    </div>
+
+    <div class="icone-simples">
+        <div class="icon-circle">
+            <span>💖</span>
+        </div>
+    </div>
+</section>
+
+{# Seção de Depoimentos com seu carrossel #}
+<section class="depoimentos-section">
+    <h1>Depoimentos</h1>
+    <p>Conheça algumas histórias de como estamos ajudando meninas grávidas:</p>
+
+    <div class="carousel-container3"> {# Contêiner para o carrossel de Depoimentos #}
+        <div class="carousel-track3">
+            {% for depoimento in depoimentos %}
+            <div class="card-wrapper3">
+                <div class="card">
                     {% if depoimento.imagem %}
-                    <img src="{{ depoimento.imagem.url }}" class="d-block w-100 img-fluid rounded" alt="{{ depoimento.titulo }}"> {# Imagem responsiva, arredondada #}
+                    <img src="{{ depoimento.imagem.url }}" class="card-img-top" alt="{{ depoimento.titulo }}">
                     {% endif %}
-                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3"> {# Legenda escura, opacidade, arredondada, padding #}
-                        <h5 class="fw-bold">{{ depoimento.titulo }}</h5> {# Título da legenda, negrito #}
-                        <p class="text-white-50">{{ depoimento.descricao }}</p> {# Descrição da legenda, texto branco semi-transparente #}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ depoimento.titulo }}</h5>
+                        <p class="card-text">{{ depoimento.texto }}</p>
                     </div>
                 </div>
-                {% endfor %}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselDepoimentosHome" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselDepoimentosHome" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
-            <div class="carousel-indicators"> {# Indicadores de slide #}
-                {% for depoimento in depoimentos %}
-                    <button type="button" data-bs-target="#carouselDepoimentosHome" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-    </section>
+        <button class="carousel-prev-btn3">❮</button>
+        <button class="carousel-next-btn3">❯</button>
+    </div>
+</section>
+    
+{% endblock %}
 
-</div> {# Fecha .container #}
+{% block extra_js %}
+    <script src="{% static 'js/home_scripts.js' %}" defer></script> {# JS para os carrosséis da home #}
 {% endblock %}

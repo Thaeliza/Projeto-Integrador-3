@@ -4,8 +4,8 @@
 {% block title %}Transparência - Instituto Maná{% endblock %} {# Título da página #}
 
 {% block extra_css %}
-    {# Nenhum CSS customizado específico para transparencia.html necessário com Bootstrap puro #}
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/transparencia.css' %}" /> {# CSS específico para a página de transparência #}
+{% endblock extra_css %}
 
 
 {% block content %} {# Bloco de conteúdo #}
