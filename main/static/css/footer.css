@@ -1,0 +1,154 @@
+/* --- Variáveis de Cor (se você as usa, é uma boa prática centralizar) --- */
+/* Estas variáveis deveriam idealmente vir do estilo.css se forem as mesmas globais */
+:root {
+    --primary-rose: #c11244;
+    /* Rosa principal do tema */
+    --dark-rose: #8b0c30;
+    /* Rosa mais escuro para hover, etc. */
+    --light-text: #f8f8f8;
+    /* Cor de texto para fundos escuros */
+    --subtle-text: rgba(255, 255, 255, 0.8);
+    /* Texto um pouco transparente */
+    --border-color: rgba(255, 255, 255, 0.2);
+    /* Borda suave */
+}
+
+/* --- ESTILOS GERAIS DO FOOTER --- */
+footer {
+    background-color: var(--primary-rose);
+    /* Fundo principal em rosa */
+    color: var(--light-text);
+    /* Cor do texto padrão para o footer */
+    padding: 40px 20px;
+    /* Espaçamento interno */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Ajuste para a fonte do seu projeto */
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-top: auto;
+    /* Importante para empurrar o footer para o final quando body é flex-column */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    /* Espaço entre os itens do grid */
+    max-width: 1200px;
+    /* Largura máxima do conteúdo do footer */
+    margin: 0 auto;
+    /* Centraliza o grid */
+    padding-bottom: 20px;
+    /* Espaço antes da linha divisória */
+}
+
+.footer-grid h5 {
+    color: var(--light-text);
+    margin-bottom: 15px;
+    font-size: 1.15em;
+    font-weight: bold;
+    border-bottom: 2px solid var(--dark-rose);
+    /* Linha rosa escura abaixo do título */
+    padding-bottom: 8px;
+    display: inline-block;
+    /* Para a borda cobrir apenas o texto do título */
+}
+
+.footer-grid p {
+    margin-bottom: 10px;
+}
+
+.footer-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-grid ul li {
+    margin-bottom: 8px;
+}
+
+.footer-grid ul li a {
+    color: var(--subtle-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-grid ul li a:hover {
+    color: var(--light-text);
+    text-decoration: underline;
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA SEÇÕES --- */
+
+/* Contato */
+.contato p {
+    white-space: pre-line;
+}
+
+/* Redes Sociais */
+.redes-sociais ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.redes-sociais ul li {
+    margin-bottom: 10px;
+}
+
+.redes-sociais .whatsapp-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Logo do Footer */
+.footer-grid .logo {
+    text-align: center;
+}
+
+.footer-grid .logo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Linha divisória e Copyright */
+footer hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 30px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.copyright {
+    text-align: center;
+    color: var(--subtle-text);
+    font-size: 0.85em;
+    margin-top: 20px;
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-grid h5 {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .redes-sociais ul {
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 30px 15px;
+    }
+}

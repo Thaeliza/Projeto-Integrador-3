@@ -1,0 +1,76 @@
+/* Seção geral da página */
+main {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+/* Título principal */
+h1.display-4 {
+    font-weight: 700;
+    color: #198754;
+}
+
+/* Texto descritivo */
+p.lead {
+    color: #444;
+    font-size: 1.15rem;
+}
+
+/* Cartões de ação */
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagens dos cards */
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Título e texto */
+.card-title {
+    font-weight: 600;
+    color: #005f4b;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Rodapé do card */
+.card-footer {
+    background-color: transparent;
+    font-size: 0.85rem;
+    border-top: none;
+}
+
+/* Botão Saiba Mais */
+.btn-outline-success {
+    font-weight: 500;
+    border-radius: 25px;
+    padding: 0.4rem 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-success:hover {
+    background-color: #198754;
+    color: #fff;
+}
+
+/* Chamada final */
+section.py-4.text-center {
+    background-color: #fff;
+    margin-top: 4rem;
+    border-top: 1px solid #ccc;
+    padding-top: 3rem;
+}

@@ -1,157 +1,464 @@
-/* Estilos gerais */
+/* --- Variáveis de Cor (RECOMENDADO para consistência) --- */
+:root {
+    --primary-color: #c11244;
+    /* Rosa principal do tema (para navbar, botões primários) */
+    --primary-light: #f9d5d3;
+    /* Rosa mais claro (para fundos de seções claras) */
+    --primary-dark: #8b0c30;
+    /* Rosa mais escuro (para hover, títulos fortes) */
+    --text-dark: #2c1a1a;
+    /* Cor de texto escuro */
+    --text-light: #ffffff;
+    /* Cor de texto claro */
+    --shadow-color: rgba(193, 18, 68, 0.25);
+    /* Sombra baseada na cor principal */
+}
+
+/* --- Estilos Globais (body, container) --- */
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    /* Cor de fundo geral */
-    color: #333;
-    /* Cor do texto padrão */
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    color: var(--text-dark);
+    transition: background-color 0.5s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1200px;
+    /* Largura padrão para o container do Bootstrap, ajuste conforme necessário */
     margin: 0 auto;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Estilos do cabeçalho e navegação */
+/* --- Estilos da Barra de Navegação (Header e Nav.main-nav) --- */
 header {
-    background-color: #333;
-    color: white;
-    padding: 1em 0;
+    background-color: var(--primary-color);
+    /* Navbar agora usa o rosa principal */
+    color: var(--text-light);
+    padding: 1.5em 0;
+    box-shadow: 0 3px 8px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: slideDown 0.7s ease forwards;
 }
 
-nav ul {
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.main-nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    box-sizing: border-box;
+    padding: 0 20px;
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Estilos do conteúdo principal */
-main {
-    padding: 20px;
-    background-color: white;
-    margin: 20px auto;
-    max-width: 960px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos do rodapé */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-}
-
-/* Estilos básicos do carrossel */
-.carousel-container {
+.main-nav ul li {
+    display: inline-block;
+    margin: 0 20px;
     position: relative;
-    overflow: hidden;
-    /* Esconde os slides que estão fora da visualização */
-    max-width: 960px;
-    /* Largura máxima do carrossel */
-    margin: 20px auto;
-    /* Centraliza o carrossel */
 }
 
-.carousel-slide {
-    display: none;
-    /* Inicialmente, esconde todos os slides */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-.carousel-slide img {
-    width: 100%;
+.main-nav ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    padding: 5px 0;
     display: block;
-    /* Remove espaço extra abaixo da imagem */
+}
+
+.main-nav ul li a::after {
+    content: '';
+    display: block;
+    margin: 4px auto 0;
+    width: 0;
+    height: 2px;
+    background: var(--text-light);
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a:focus {
+    color: var(--primary-light);
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a:focus::after {
+    width: 100%;
+}
+
+/* --- Estilos do Conteúdo Principal (tag <main>) --- */
+main {
+    flex-grow: 1;
+    padding: 0;
+    /* Remove padding do main. O container interno terá padding. */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Fundo para o conteúdo do main */
+    margin: 40px auto;
+    /* Margem vertical e centraliza o main */
+    max-width: 960px;
+    /* Largura máxima para a área do main. Ajuste ou remova se quiser largura total. */
+    box-shadow: 0 8px 20px var(--shadow-color);
+    border-radius: 12px;
+    animation: fadeInContent 1s ease forwards;
+    box-sizing: border-box;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Estilos para a Seção Hero (Imagem Principal) --- */
+.hero-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.hero-image-container {
+    width: 100%;
+    height: 300px;
+    /* **ALTURA MENOR para a Hero Image** - Ajuste se necessário */
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Media Queries para Responsividade do Hero */
+@media (max-width: 992px) {
+    .hero-image-container {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-image-container {
+        height: 200px;
+    }
+}
+
+/* --- Estilos para Carrosséis Bootstrap (Customizações) --- */
+/* Estes estilos afetam os carrosséis criados com as classes 'carousel slide' do Bootstrap */
+/* Adicione aqui qualquer customização que você queira para os carrosséis do Bootstrap */
+.carousel {
+    margin-bottom: 40px;
+    /* Espaço após cada carrossel */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    /* Importante para bordas arredondadas e sombras */
+}
+
+.carousel-inner {
+    border-radius: 12px;
+    /* Se quiser arredondar o conteúdo interno */
+}
+
+.carousel-item img {
+    height: 450px;
+    /* Altura fixa para imagens de carrossel. Ajuste. */
+    object-fit: cover;
+    /* Garante que a imagem preencha sem distorcer */
 }
 
 .carousel-caption {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
+    border-radius: 8px;
 }
 
-.carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
+/* Media Queries para Carrossel */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 300px;
+        /* Ajuste para mobile */
+    }
+
+    .carousel-caption {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.2em;
+    }
+}
+
+
+/* --- Seção Notícias (da Home) --- */
+.noticias-section {
+    background-color: var(--primary-light);
+    padding: 30px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* --- Seção Projeto Sarah --- */
+.projeto-sarah-section {
+    padding: 40px 20px;
+    background-color: var(--text-light);
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.titulo-doacao {
+    margin-bottom: 30px;
+}
+
+.titulo-doacao hr {
     border: none;
+    border-top: 2px solid var(--primary-light);
+    max-width: 150px;
+    margin: 0 auto 15px;
+}
+
+.titulo-doacao h1 {
+    color: var(--primary-dark);
+    font-size: 2.8em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Estilos do botão DOE AGORA! */
+.botao-doar {
+    text-align: center;
+    margin: 30px 0 50px;
+}
+
+.botao-doar button {
+    background-color: #28a745;
     color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.botao-doar button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.campanhas {
+    margin-bottom: 40px;
+}
+
+.campanhas h2 {
+    color: var(--primary-dark);
     font-size: 2em;
-    padding: 10px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+    margin-bottom: 15px;
 }
 
-.carousel-control:hover {
-    opacity: 1;
+.campanhas p {
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
 }
 
-.carousel-control.prev {
-    left: 10px;
+.icone-simples {
+    margin-bottom: 40px;
 }
 
-.carousel-control.next {
-    right: 10px;
-}
-
-.carousel-indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-}
-
-.carousel-indicators button {
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    width: 15px;
-    height: 15px;
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: var(--primary-light);
     border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 3em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-indicators button.active {
-    background-color: white;
+/* Nova Seção de Campanhas de Arrecadação (Foto e Texto Destaque) */
+.campanhas-destaque-section {
+    padding: 60px 20px;
+    background-color: var(--primary-light);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-/* Exibe o primeiro slide por padrão */
-.carousel-slide:first-child {
-    display: block;
+@media (max-width: 768px) {
+    .campanhas-destaque-section .text-md-start {
+        text-align: center !important;
+    }
+}
+
+
+/* --- Seção Depoimentos (da Home) --- */
+.depoimentos-section {
+    background-color: var(--primary-light);
+    padding: 30px 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* --- Classes utilitárias de cor para o tema --- */
+.text-mana-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-mana-dark {
+    color: var(--primary-dark) !important;
+}
+
+.text-mana-secondary {
+    color: #6c757d !important;
+}
+
+/* Exemplo de uma cor secundária que não é rosa */
+
+.btn-mana-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-mana-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-mana-dark {
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-mana-dark:hover {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+}
+
+.bg-mana-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.btn-mana-warning {
+    background-color: var(--primary-light);
+    color: var(--text-dark);
+    border-color: var(--primary-light);
+    transition: all 0.3s ease;
+}
+
+.btn-mana-warning:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+
+/* --- Responsividade Geral (navbar, main) --- */
+@media (max-width: 992px) {
+    .main-nav ul li {
+        margin: 0 10px;
+        font-size: 1rem;
+    }
+
+    main {
+        max-width: 90%;
+        margin: 30px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-nav ul li {
+        margin: 10px 0;
+    }
+
+    main {
+        margin: 20px 15px;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .section-title {
+        font-size: 2em;
+    }
+
+    .section-description {
+        font-size: 1em;
+    }
+
+    .titulo-doacao h1 {
+        font-size: 2.2em;
+    }
+
+    .botao-doar button {
+        font-size: 1.3em;
+        padding: 15px 30px;
+    }
+
+    .campanhas h2 {
+        font-size: 1.8em;
+    }
+
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5em;
+    }
 }

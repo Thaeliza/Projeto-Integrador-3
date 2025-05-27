@@ -1,17 +1,87 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Contato{% endblock %}
+{% block title %}Contato - Instituto Maná{% endblock %}
+
+{% block extra_css %}
+    <style>
+        /* Espaço reservado para ajustes específicos de estilo, se necessário */
+    </style>
+{% endblock %}
 
 {% block content %}
-<h1>Contato</h1>
-<form method="post">
-    {% csrf_token %}
-    <label for="name">Nome:</label>
-    <input type="text" id="name" name="name" required><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
-    <label for="message">Mensagem:</label>
-    <textarea id="message" name="message" required></textarea><br>
-    <button type="submit">Enviar</button>
-</form>
+<main class="container my-5">
+    <section class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-dark">Entre em Contato Conosco</h1>
+        <p class="lead text-secondary">Tem dúvidas, sugestões ou quer fazer uma parceria? Fale conosco!</p>
+    </section>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <h2 class="h3 fw-bold mb-3">Envie-nos uma Mensagem</h2>
+            <p class="text-muted mb-4">Preencha o formulário abaixo e retornaremos o mais breve possível.</p>
+
+            <form method="post" class="p-4 border rounded shadow-sm bg-light">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-bold">{{ field.label }}</label>
+                        {{ field.as_widget }}
+                        
+                        {% if field.help_text %}
+                            <div class="form-text text-muted">{{ field.help_text }}</div>
+                        {% endif %}
+                        
+                        {% for error in field.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                    Enviar Mensagem <i class="bi bi-send-fill ms-2"></i>
+                </button>
+            </form>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-lg-5">
+            <h2 class="h3 fw-bold mb-3">Nossos Contatos</h2>
+            <div class="p-4 border rounded shadow-sm bg-light">
+                <p class="mb-2">
+                    <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                    <strong>Endereço:</strong> Rua Jordão Ramalho, 100 - Jardim Maristela - CEP 02806-110 - Carapicuíba - SP
+                </p>
+                <p class="mb-2">
+                    <i class="bi bi-whatsapp text-success me-2"></i>
+                    <strong>WhatsApp:</strong>
+                    <a href="https://wa.me/5511981576013" target="_blank" class="text-decoration-none text-dark">11 9 8157-6013</a>
+                </p>
+                <p class="mb-2">
+                    <i class="bi bi-envelope-fill text-info me-2"></i>
+                    <strong>E-mail:</strong>
+                    <a href="mailto:contato@institutomana.org.br" class="text-decoration-none text-dark">contato@institutomana.org.br</a>
+                </p>
+                <p class="mb-0">
+                    <i class="bi bi-clock-fill text-warning me-2"></i>
+                    <strong>Horário de Atendimento:</strong> Seg-Sex: 9h às 18h
+                </p>
+            </div>
+
+            <h2 class="h4 fw-bold mt-5 mb-3 text-dark">Onde Estamos</h2>
+            <div class="ratio ratio-16x9 rounded shadow-sm">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.433434685799!2d-46.85210982548777!3d-23.55160867876807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf025178619623%3A0x6b4c3e8a1f7e0d37!2sRua%20Jord%C3%A3o%20Ramalho%2C%20100%20-%20Jardim%20Maristela%2C%20Carapicu%C3%ADba%20-%20SP%2C%2006320-000!5e0!3m2!1spt-BR!2sbr!4v1716766779435!5m2!1spt-BR!2sbr"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

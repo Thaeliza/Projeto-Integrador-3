@@ -1,0 +1,102 @@
+/* ---------- Estilo geral da página ---------- */
+main {
+    scroll-behavior: smooth;
+}
+
+/* ---------- Cores e destaque ---------- */
+h1,
+h2,
+h5 {
+    color: #cc3366;
+    /* Rosa escuro para títulos */
+}
+
+.bg-light {
+    background-color: #fdf1f4 !important;
+    /* Rosa claro */
+}
+
+.text-success {
+    color: #cc3366 !important;
+    /* Substitui o verde por rosa escuro */
+}
+
+/* ---------- Cartões ---------- */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Botões ---------- */
+.btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Rosa escuro em botões outline */
+.btn-outline-primary {
+    color: #cc3366;
+    border-color: #cc3366;
+}
+
+.btn-outline-primary:hover {
+    background-color: #cc3366;
+    color: #fff;
+}
+
+/* Botões antes em verde agora em rosa */
+.btn-success {
+    background-color: #e83e8c;
+    border-color: #e83e8c;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #d63384;
+    border-color: #d63384;
+}
+
+/* Botão claro com hover em rosa */
+.btn-light:hover {
+    background-color: #f8d7da;
+    color: #212529;
+}
+
+/* ---------- Accordion ---------- */
+.accordion-button:not(.collapsed) {
+    background-color: #fce4ec;
+    /* Rosa bem claro */
+    color: #cc3366;
+    font-weight: bold;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(204, 51, 102, 0.25);
+}
+
+/* ---------- Seção de contato final ---------- */
+section.bg-info {
+    background-color: #f8bbd0 !important;
+    /* Fundo rosa claro */
+    border: none;
+}
+
+section.bg-info h2,
+section.bg-info p {
+    color: #fff;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+    .btn-lg {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .card-body p {
+        font-size: 0.95rem;
+    }
+}

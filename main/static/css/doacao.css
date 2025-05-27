@@ -1,0 +1,76 @@
+/* ---------- Estilo da seção principal ---------- */
+.doacao-pix {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff0f5;
+    /* rosa claro */
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+/* ---------- Título ---------- */
+.doacao-pix h2 {
+    color: #cc3366;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* ---------- Parágrafo ---------- */
+.doacao-pix p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+/* ---------- Imagem do QR Code ---------- */
+#doacao-pix img,
+#doacao-pix #logopix {
+    width: 280px;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid #cc3366;
+    padding: 8px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+#doacao-pix img:hover,
+#doacao-pix #logopix:hover {
+    transform: scale(1.05);
+}
+
+/* ---------- Animação suave ---------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 768px) {
+    .doacao-pix {
+        padding: 20px;
+    }
+
+    .doacao-pix h2 {
+        font-size: 1.5rem;
+    }
+
+    .doacao-pix p {
+        font-size: 1rem;
+    }
+
+    #logopix {
+        width: 200px;
+    }
+}

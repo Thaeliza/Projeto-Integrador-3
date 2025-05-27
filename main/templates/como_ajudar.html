@@ -1,8 +1,112 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {# Extende seu template base #}
+{% load static %} {# Carrega a tag 'static' #}
 
-{% block title %}Como Ajudar - [Nome da sua ONG]{% endblock %}
+{% block title %}Como Ajudar - Instituto Maná{% endblock %} {# Título da página #}
 
-{% block content %}
-    <h1>Como aJudar</h1>
-    <p>Aqui você colocará a história da sua ONG, sua missão, seus valores e a equipe (opcional).</p>
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/como_ajudar.css' %}">
 {% endblock %}
+
+{% block content %} {# Bloco de conteúdo #}
+<main class="container my-5">
+    {# Título principal da página #}
+    <section class="mb-5 text-center">
+        <h1 class="display-4 text-warning">Como Você Pode Ajudar</h1>
+        <p class="lead">Sua contribuição faz a diferença. Junte-se a nós para construir um futuro melhor!</p>
+    </section>
+
+    {# Seção 1: Apoio Financeiro #}
+    <section class="row align-items-center mb-5 py-4 bg-light rounded shadow-sm">
+        <div class="col-md-6">
+            <img src="{% static 'img/Imagem do WhatsApp de 2025-05-22 à(s) 09.31.59_f19a5b5d.jpg' %}" class="img-fluid rounded mb-3" alt="Apoio Financeiro">
+        </div>
+        <div class="col-md-6">
+            <h2 class="h3 mb-3 text-warning">Apoio Financeiro</h2>
+            <p>Sua doação financeira, por menor que seja, é fundamental para a sustentabilidade de nosso projeto e para que possamos alcançar mais pessoas.</p>
+            <p>Os recursos são utilizados para <span class="fw-bold">compras de enxovais, custeio de equipe, manutenção de instalações, etc.</span>, garantindo o funcionamento de nossas iniciativas.</p>
+            <p class="mb-3">Você pode doar de diversas formas:</p>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-bank me-2 text-primary"></i>**Transferência Bancária:** <br> Banco: [Nome do Banco] | Agência: [Número da Agência] | Conta: [Número da Conta] | CNPJ/CPF: 54.892.959/0001-08</li>
+                <li><i class="bi bi-qr-code me-2 text-primary"></i>**PIX:** <br> Chave PIX: 54892959000108</li>
+            </ul>
+            <a href="{% url 'doacao' %}" class="btn btn-warning btn-lg mt-2" target="_blank">
+                <i class="bi bi-cash-stack me-2"></i>Doar Agora
+            </a>
+            <p class="mt-3 text-muted"><small>Emitimos recibos para todas as doações. Consulte-nos para mais informações sobre dedução fiscal (se aplicável).</small></p>
+        </div>
+    </section>
+
+    {# Seção 2: Voluntariado #}
+    <section class="mb-5 py-4 bg-light rounded shadow-sm">
+        <h2 class="h3 mb-4 text-center text-info">Seja Voluntário</h2>
+        <p class="text-center text-muted">Compartilhe seu tempo, habilidades e paixão conosco. Sua dedicação é um presente valioso!</p>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-info"><i class="bi bi-calendar-check me-2"></i>Como Funciona</h5>
+                        <p class="card-text">Oferecemos diversas oportunidades de voluntariado, desde apoio em eventos, atividades administrativas, até a participação direta em nossos projetos. Temos vagas para diferentes perfis e disponibilidades de tempo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-info"><i class="bi bi-people-fill me-2"></i>Áreas de Atuação</h5>
+                        <p class="card-text">Estamos sempre em busca de voluntários para as áreas de <span class="fw-bold">educação, saúde, comunicação, logística, mentoria, etc.</span>. Se você tem alguma habilidade específica que acredita que pode nos ajudar, fale conosco!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'contato' %}" class="btn btn-outline-info btn-lg">
+                <i class="bi bi-person-plus me-2"></i>Quero Ser Voluntário
+            </a>
+        </div>
+    </section>
+
+    {# Seção 3: Doação de Itens ou Outros Tipos de Apoio #}
+    <section class="mb-5 py-4 bg-light rounded shadow-sm">
+        <h2 class="h3 mb-4 text-center text-secondary">Outras Formas de Ajudar</h2>
+        <p class="text-center text-muted">Sua generosidade vai além do financeiro.</p>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary"><i class="bi bi-box-seam me-2"></i>Doação de Itens</h5>
+                        <p class="card-text">Aceitamos doações de <span class="fw-bold">[Ex: alimentos não perecíveis, roupas, livros, material escolar, equipamentos eletrônicos, etc.]</span>. Entre em contato para saber quais itens estamos mais precisando no momento e como realizar a entrega.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary"><i class="bi bi-megaphone me-2"></i>Divulgação</h5>
+                        <p class="card-text">Ajude-nos a ampliar nosso alcance! Compartilhe nossas ações e projetos em suas redes sociais, converse com amigos e familiares. Quanto mais pessoas nos conhecerem, maior será nosso impacto.</p>
+                        <div class="mt-3">
+                            <a href="https://www.facebook.com/story.php?story_fbid=2382721211921377&id=100005505635922&rdid=IVR43GOi0UpufhmI#" target="_blank" class="text-secondary me-3"><i class="bi bi-facebook fs-4"></i></a>
+                            <a href="https://www.instagram.com/institutomanaong/?igsh=Mmo2NHlhMXBqdmtv#" target="_blank" class="text-secondary me-3"><i class="bi bi-instagram fs-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Seção Final: Gratidão e Chamada à Ação #}
+    <section class="text-center py-5 bg-primary text-white rounded">
+        <h2 class="h3 mb-3">Seu Apoio é o Nosso Combustível!</h2>
+        <p class="lead">Cada gesto de apoio nos impulsiona a ir além e a transformar mais vidas.</p>
+        <p>Seja parte desta mudança. Seja um agente de transformação!</p>
+        <a href="{% url 'contato' %}" class="btn btn-lg btn-warning mt-3">Tire Suas Dúvidas</a>
+    </section>
+</main>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/carousel.js' %}"></script>
+{% endblock scripts %}
+

@@ -1,0 +1,110 @@
+/* ========== Container principal ========== */
+main {
+    background-color: #fff5f8;
+    /* rosa bem suave */
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+/* ========== Títulos ========== */
+h1.display-4 {
+    color: #cc3366;
+    /* rosa escuro */
+    font-weight: 700;
+}
+
+h2.h3 {
+    color: #cc3366;
+    margin-bottom: 1rem;
+}
+
+/* ========== Texto de introdução ========== */
+.lead {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* ========== Seções com fundo ========== */
+.bg-light {
+    background-color: #fde8ef !important;
+    /* rosa claro */
+}
+
+/* ========== Cards ========== */
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-body h5 {
+    color: #cc3366;
+    font-weight: 600;
+}
+
+.card-body p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ========== Ícones ========= */
+.bi {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+    color: #cc3366;
+}
+
+/* ========== Botões ========== */
+.btn-warning {
+    background-color: #e83e8c;
+    border-color: #e83e8c;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0.5rem 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #d63384;
+    border-color: #d63384;
+}
+
+/* ========== Seção final ========== */
+section.bg-primary {
+    background-color: #f8bbd0 !important;
+    /* rosa médio */
+}
+
+section.bg-primary .btn-warning {
+    background-color: #cc3366;
+    border-color: #cc3366;
+}
+
+section.bg-primary .btn-warning:hover {
+    background-color: #b02e5c;
+}
+
+/* ========== Responsividade ========== */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+    }
+
+    .btn-lg,
+    .btn-warning {
+        width: 100%;
+        font-size: 1rem;
+    }
+}

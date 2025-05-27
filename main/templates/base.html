@@ -1,60 +1,223 @@
-
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Título do Site{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n5UYc395PdgONW39GFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
+
+    <title>{% block title %}Instituto Maná{% endblock %}</title>
+
+    {% load static %}
+
+    {# CSS DO BOOTSTRAP #}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    {# Bootstrap Icons (altamente recomendado para designs modernos) #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    {# Font Awesome (inclua apenas se ícones específicos do FA forem cruciais e não estiverem disponíveis no Bootstrap Icons) #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    {# Bloco para ajustes de CSS específicos de páginas filhas #}
+    {% block extra_css %}{% endblock %}
+
+    <style>
+        /* CSS CUSTOMIZADO MÍNIMO - APENAS PARA PROPRIEDADES DE LAYOUT NÃO DIRETAMENTE NAS UTILITÁRIAS DO BOOTSTRAP */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Garante que o rodapé permaneça na parte inferior da viewport */
+        }
+        main {
+            flex: 1; /* Permite que a área de conteúdo principal cresça e empurre o rodapé para baixo */
+        }
+        .hero-section {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 400px; /* Altura fixa para a seção da imagem de destaque */
+        }
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem cubra toda a seção hero */
+            object-position: center; /* Centraliza o conteúdo da imagem */
+        }
+        /* Se você precisar de um "verde Maná" específico ou "rosa" que não sejam os padrões do Bootstrap,
+           você pode definir variáveis CSS aqui e usá-las nas classes do HTML, por exemplo:
+           :root {
+               --bs-success: #28a745; // Substitui o verde padrão do Bootstrap
+               --bs-success-rgb: 40,167,69;
+               --mana-pink: #ff69b4;
+           }
+           E no HTML, você ainda usaria classes Bootstrap como 'btn-success', ou criaria uma classe como '.bg-mana-pink'
+           se fosse um caso de uso muito específico. */
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Início</a></li>
-                <li><a href="{% url 'quem_somos' %}">Quem Somos</a></li>
-                <li><a href="{% url 'como_ajudamos' %}">Como Ajudamos</a></li>
-                <li><a href="{% url 'preciso_de_ajuda' %}">Preciso de Ajuda</a></li>
-                <li><a href="{% url 'como_ajudar' %}">Como Você Pode Ajudar</a></li>
-                <li><a href="{% url 'contato' %}">Contato</a></li>
-            </ul>
-        </nav>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3"> {# Adicionado py-3 para preenchimento vertical #}
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-4" href="{% url 'home' %}">Instituto Maná</a> {# Tamanho da fonte maior para a marca #}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> {# Adicionado mb-2 mb-lg-0 para espaçamento em telas pequenas #}
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="{% url 'home' %}">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'quem_somos' %}">Quem Somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'nossas_acoes' %}">Nossas Ações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'preciso_de_ajuda' %}">Transparência</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'como_ajudar' %}">Como Ajudar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'contato' %}">Contato</a>
+                    </li>
 
-<div class="carousel-container">
-            <div class="carousel-slide">
-                {% for image in carousel_images %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                    {% if image.title or image.description %}
-                    <div class="carousel-caption">
-                        <h3>{{ image.title }}</h3>
-                        <p>{{ image.description }}</p>
-                    </div>
+                    {% if user.is_authenticated and user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'cadastro' %}">Agenda</a>
+                    </li>
                     {% endif %}
-                </div>
-                {% endfor %}
+                    <li class="nav-item">
+                        {# Usando a cor 'success' do Bootstrap que é um verde adequado #}
+                        <a class="nav-link btn btn-success text-white px-3 py-2 ms-lg-3" href="{% url 'doacao' %}">Doação</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Olá, {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end bg-dark shadow border-0">
+                                <li>
+                                    <form action="{% url 'logout' %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item text-white">Sair</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'login' %}">Entrar</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
-            <button class="prev" onclick="moveSlide(-1)">❮</button>
-            <button class="next" onclick="moveSlide(1)">❯</button>
         </div>
-    </header>
+    </nav>
+</header>
 
-    <main>   
+<section class="hero-section">
+    <div class="hero-image-container">
+        <img src="{% static 'img/imagem-gravida-projetosarah.jpg' %}" alt="Imagem de destaque" class="hero-image">
+    </div>
+</section>
 
+<div id="carouselPrincipal" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for image in carousel_base_images %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ image.image.url }}" class="d-block w-100 img-fluid" alt="{{ image.title }}">
+            {% if image.title or image.description %}
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                <h5 class="fw-bold">{{ image.title }}</h5>
+                <p>{{ image.description }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <div class="carousel-item active">
+            <img src="{% static 'img/placeholder_carousel.jpg' %}" class="d-block w-100 img-fluid" alt="Carrossel Vazio">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="fw-bold">Adicione imagens ao carrossel principal!</h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+    </button>
+</div>
+
+<main class="container my-4">
     {% block content %}
-
     {% endblock %}
-    </main>
+</main>
 
-    <footer>
-        <p>&copy; {{ year }} [Nome da sua ONG] - Todos os direitos reservados</p>
-          </footer>
+<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+                <h5 class="fw-bold mb-3">Contato</h5>
+                <p class="mb-0">Telefone: (11) 9 8157-6013</p>
+                <p>Email: contato@exemplo.com</p>
+            </div>
+
+            <div class="col">
+                <h5 class="fw-bold mb-3">Links Úteis</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white-50 text-decoration-none py-1 d-block">Página Inicial</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none py-1 d-block">Serviços</a></li>
+                    <li><a href="{% url 'contato' %}" class="text-white-50 text-decoration-none py-1 d-block">Contato</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none py-1 d-block">Política de Privacidade</a></li>
+                    <li><a href="https://www.carapicuiba.sp.gov.br/cmdca" target="_blank" class="text-white-50 text-decoration-none py-1 d-block">CMDCA de Carapicuíba</a></li>
+                    <li><a href="https://www.rededh.org.br/" target="_blank" class="text-white-50 text-decoration-none py-1 d-block">Rede de Desenvolvimento Humano</a></li>
+                    <li><a href="https://www.atados.com.br/" target="_blank" class="text-white-50 text-decoration-none py-1 d-block">Plataforma Atados</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5 class="fw-bold mb-3">Mapa do Site</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white-50 text-decoration-none py-1 d-block">Início</a></li>
+                    <li><a href="{% url 'quem_somos' %}" class="text-white-50 text-decoration-none py-1 d-block">Quem somos</a></li>
+                    <li><a href="{% url 'nossas_acoes' %}" class="text-white-50 text-decoration-none py-1 d-block">Nossas Ações</a></li>
+                    <li><a href="{% url 'preciso_de_ajuda' %}">Transparência</a></li>
+                    <li><a href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
+                    <li><a href="{% url 'contato' %}">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5 class="fw-bold mb-3">Redes Sociais</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="https://www.facebook.com/story.php?story_fbid=2382721211921377&id=100005505635922&rdid=IVR43GOi0UpufhmI#" target="_blank" class="text-white-50 text-decoration-none"><i class="fab fa-facebook me-2"></i>Facebook</a></li>
+                    <li class="mb-2"><a href="https://www.instagram.com/institutomanaong/?igsh=Mmo2NHlhMXBqdmtv#" target="_blank" class="text-white-50 text-decoration-none"><i class="fab fa-instagram me-2"></i>Instagram</a></li>
+                    <li class="mb-2"><a href="https://wa.me/5511981576013" target="_blank" class="text-white-50 text-decoration-none d-inline-flex align-items-center">
+                        <img src="{% static 'img/whatsapp-icon.png' %}" alt="WhatsApp" class="me-2" style="width: 24px;">
+                        Fale conosco no WhatsApp</a></li>
+                </ul>
+                <div class="mt-4 text-center text-md-start">
+                    <img src="{% static 'img/foto-footer.jpg' %}" alt="Projeto Sarah" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+        <hr class="my-4 border-light border-opacity-25">
+        <p class="text-center text-white-50 small mb-0">&copy; 2025 Sua Empresa. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+{# JavaScript do Bootstrap - ESSENCIAL para carrosséis, dropdowns, etc. #}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+
+{# Bloco para JavaScript ESPECÍFICO de páginas filhas #}
+{% block extra_js %}{% endblock %}
+
 </body>
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="{% static 'js/carousel.js' %}"></script>
-
 </html>
