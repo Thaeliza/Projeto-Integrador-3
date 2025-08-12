@@ -1,40 +1,31 @@
-{% extends 'base.html' %} {# Extende seu template base que já contém o Bootstrap CSS/JS e sua estrutura global #}
-{% load static %} {# Carrega a tag 'static' para lidar com arquivos estáticos (imagens, CSS customizado, etc.) #}
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Nossas Ações - Sua Organização{% endblock %} {# Define o título específico desta página #}
+{% block title %}Nossas Ações - Projeto Sarah{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/nossas_acoes.css' %}" /> {# CSS específico para a página de ações #}
-{% endblock extra_css %}
-
-{% block content %} 
-<main class="main-content">
-   
+{% block content %}
+<div class="container my-5">
     <section class="mb-5 text-center">
         <h1 class="display-4 text-success">Nossas Ações</h1>
         <p class="lead">Descubra os projetos e iniciativas que estamos realizando e o impacto que geramos.</p>
     </section>
 
-    {# Verificação se existem ações para exibir #}
     {% if acoes %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
-        {# Loop sobre cada 'acao' passada pela view do Django #}
         {% for acao in acoes %}
         <div class="col">
-            <div class="card h-100 shadow-sm border-0"> {# Card do Bootstrap para cada ação #}
-                {% if acao.imagem %} {# Verifica se a ação tem uma imagem associada #}
+            <div class="card h-100 shadow-sm border-0">
+                {% if acao.imagem %}
                 <img src="{{ acao.imagem.url }}" class="card-img-top" alt="{{ acao.titulo }}">
-                {% else %} {# Se não tiver imagem, usa um placeholder #}
+                {% else %}
                 <img src="{% static 'img/placeholder_acao.jpg' %}" class="card-img-top" alt="Imagem Padrão de Ação">
                 {% endif %}
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-primary">{{ acao.titulo }}</h5>
-                    {# Trunca a descrição para exibir apenas um trecho #}
                     <p class="card-text text-muted">{{ acao.descricao_breve|truncatechars:150 }}</p>
-                    {# Link para a página de detalhes da ação, usando o 'slug' para URL amigável #}
-                    <a href="{% url 'detalhe_acao' acao.slug %}" class="btn btn-sm btn-outline-success mt-2">Saiba Mais <i class="bi bi-arrow-right"></i></a>
+                    <a href="{% url 'detalhe_acao' acao.slug %}" class="btn btn-sm btn-outline-success mt-auto">Saiba Mais <i class="bi bi-arrow-right"></i></a>
                 </div>
-                {% if acao.data_publicacao %} {# Exibe a data de publicação, se disponível #}
+                {% if acao.data_publicacao %}
                 <div class="card-footer text-end text-small text-muted">
                     <small>Publicado em: {{ acao.data_publicacao|date:"d/m/Y" }}</small>
                 </div>
@@ -44,7 +35,7 @@
         {% endfor %}
     </div>
 
-    {% else %} {# Mensagem se não houver ações #}
+    {% else %}
     <div class="alert alert-info text-center" role="alert">
         <h4 class="alert-heading">Em Construção!</h4>
         <p>Ainda não há ações ou projetos publicados aqui. Fique de olho, em breve teremos novidades!</p>
@@ -53,10 +44,9 @@
     </div>
     {% endif %}
 
-    {# Seção Opcional para Chamada à Ação ou Links #}
     <section class="py-4 text-center">
         <p class="lead">Quer saber mais sobre o impacto que estamos gerando?</p>
         <a href="{% url 'contato' %}" class="btn btn-primary btn-lg mt-3">Fale Conosco</a>
     </section>
-</main>
-{% endblock content %}
+</div>
+{% endblock %}

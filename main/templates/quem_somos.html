@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Quem Somos - Instituto Maná{% endblock %}
+{% block title %}Quem Somos - Projeto Sarah{% endblock %}
 
 {% block content %}
-<main class="container my-5">
+<div class="container my-5">
     <section class="mb-5 text-center">
         <h1 class="display-4 text-primary">Quem Somos</h1>
         <p class="lead">Conheça a história, a missão e os valores que nos movem.</p>
@@ -12,23 +12,22 @@
 
     <section class="row align-items-center mb-5">
         <div class="col-md-6 order-md-2">
-            <img src="{% static 'img/historia.jpg' %}" class="img-fluid rounded shadow-sm mb-3" alt="Nossa História">
+            <img src="{{ static_images.quem_somos_historia.image.url }}" class="img-fluid rounded shadow-sm mb-3" alt="{{ static_images.quem_somos_historia.description }}">
         </div>
         <div class="col-md-6 order-md-1">
             <h2 class="h3 mb-3">Nossa História</h2>
-            <p>A <strong class="text-secondary">[Nome da Sua Empresa]</strong> nasceu da paixão por <span class="fw-bold">[mencione a área de atuação ou problema que você resolveu]</span>. Fundada em <span class="fw-bold">[Ano de Fundação]</span> por <span class="fw-bold">[Nomes dos Fundadores, se relevante]</span>, nossa jornada começou com a simples ideia de <span class="fst-italic">[a ideia central ou objetivo inicial]</span>.</p>
-            <p>Desde então, temos crescido e evoluído, mas mantendo sempre a essência do que nos motivou a dar o primeiro passo: <span class="fw-bold">[mencione um valor central ou propósito]</span>.</p>
+            <p>O <strong class="text-secondary"> Projeto Sarah</strong> nasceu da paixão por ajudar meninas grávidas carentes. Fundada em 2024 por [Nomes dos Fundadores, se relevante], nossa jornada começou com a simples ideia de oferecer apoio e um futuro melhor para estas jovens.</p>
+            <p>Desde então, temos crescido e evoluído, mas mantendo sempre a essência do que nos motivou a dar o primeiro passo: o **compromisso** e a **empatia**.</p>
         </div>
     </section>
 
     <section class="row align-items-center mb-5">
         <div class="col-md-6">
-            <img src="{% static 'img/missao_visao.jpg' %}" class="img-fluid rounded shadow-sm mb-3" alt="Missão e Visão">
+            <img src="{{ static_images.quem_somos_missao.image.url }}" class="img-fluid rounded shadow-sm mb-3" alt="{{ static_images.quem_somos_missao.description }}">
         </div>
         <div class="col-md-6">
             <h2 class="h3 mb-3">Nossa Missão e Visão</h2>
-            <p>Nossa <strong class="text-success">missão</strong> é <span class="fw-bold">[descreva sua missão de forma clara e concisa]</span>. Buscamos <span class="text-decoration-underline">[o que você entrega ao cliente/mercado]</span>, através de <span class="fw-bold">[como você faz isso, seus diferenciais]</span>, para <span class="fst-italic">[o impacto que você quer causar]</span>.</p>
-            <p>Almejamos ser <strong class="text-info">[descreva sua visão para o futuro da empresa, seja um líder de mercado, um inovador, etc.]</strong>, reconhecidos por <span class="fw-bold">[qualidade, inovação, atendimento, etc.]</span> e por <span class="fst-italic">[o impacto que você quer ter no mundo ou na sua indústria]</span>.</p>
+            <p>Nossa <strong class="text-success">missão</strong> é capacitar jovens mães através de educação e suporte, garantindo que elas e seus bebês tenham uma vida digna. Almejamos ser uma referência em apoio materno-infantil, reconhecidos por nosso impacto positivo e por nosso trabalho transparente.</p>
         </div>
     </section>
 
@@ -38,44 +37,35 @@
             <div class="col-md-4 mb-3">
                 <div class="card h-100 border-primary">
                     <div class="card-body">
-                        <h4 class="card-title text-primary"><i class="bi bi-lightbulb-fill me-2"></i>[Valor 1]</h4>
-                        <p class="card-text">[Pequena descrição de como este valor se manifesta na prática].</p>
+                        <h4 class="card-title text-primary"><i class="bi bi-heart-fill me-2"></i>Empatia</h4>
+                        <p class="card-text">Colocamo-nos no lugar de cada jovem, oferecendo um suporte genuíno e acolhedor.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card h-100 border-success">
                     <div class="card-body">
-                        <h4 class="card-title text-success"><i class="bi bi-hand-thumbs-up-fill me-2"></i>[Valor 2]</h4>
-                        <p class="card-text">[Pequena descrição].</p>
+                        <h4 class="card-title text-success"><i class="bi bi-hand-thumbs-up-fill me-2"></i>Compromisso</h4>
+                        <p class="card-text">Garantimos um acompanhamento de longo prazo, do início da gravidez até os primeiros anos da criança.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card h-100 border-info">
                     <div class="card-body">
-                        <h4 class="card-title text-info"><i class="bi bi-people-fill me-2"></i>[Valor 3]</h4>
-                        <p class="card-text">[Pequena descrição].</p>
+                        <h4 class="card-title text-info"><i class="bi bi-people-fill me-2"></i>Transparência</h4>
+                        <p class="card-text">Atuamos com total clareza em todas as nossas ações e uso dos recursos.</p>
                     </div>
                 </div>
             </div>
-            
-        </div>
-    </section>
-
-    <section class="row mb-5">
-        <div class="col-12">
-            <h2 class="h3 mb-3 text-center">O Que Nos Torna Diferentes</h2>
-            <p class="text-center">No mercado de <strong class="text-danger">[sua área de atuação]</strong>, a <strong class="text-secondary">[Nome da Sua Empresa]</strong> se destaca por <span class="fw-bold">[mencione 1-2 diferenciais específicos, como: abordagem personalizada, tecnologia de ponta, equipe altamente qualificada, foco na sustentabilidade, suporte ao cliente excepcional, etc.]</span>.</p>
-            <p class="text-center">Acreditamos que nosso foco em <span class="fw-bold">[reforce um ponto chave que você faz melhor que a concorrência]</span> é o que nos impulsiona a ir além a cada dia, garantindo a excelência em tudo que fazemos.</p>
         </div>
     </section>
 
     <section class="text-center py-5 bg-primary text-white rounded">
         <h2 class="h3 mb-3">Venha Construir o Futuro Conosco</h2>
-        <p class="lead">Convidamos você a fazer parte da nossa jornada. Seja como cliente, parceiro ou futuro talento, a <strong class="text-warning">[Nome da Sua Empresa]</strong> está sempre de portas abertas para construir um futuro onde <span class="fw-bold">[reforce um benefício ou valor]</span>.</p>
+        <p class="lead">Convidamos você a fazer parte da nossa jornada. Seja como doador, voluntário ou futuro parceiro, estamos de portas abertas para construir um futuro onde todas as jovens mães têm uma chance de prosperar.</p>
         <p>Agradecemos a confiança e esperamos vê-lo em breve!</p>
         <a href="{% url 'contato' %}" class="btn btn-lg btn-light mt-3">Entre em Contato</a>
     </section>
-</main>
+</div>
 {% endblock %}

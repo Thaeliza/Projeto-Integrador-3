@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contato - Instituto Maná{% endblock %}
+{% block title %}Contato - Projeto Sarah{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/contato.css' %}" />
 {% endblock %}
 
 {% block content %}
-<main class="container my-5">
+<div class="container my-5">
     <section class="text-center mb-5">
         <h1 class="display-4 fw-bold text-dark">Entre em Contato Conosco</h1>
         <p class="lead text-secondary">Tem dúvidas, sugestões ou quer fazer uma parceria? Fale conosco!</p>
@@ -19,7 +19,7 @@
             <h2 class="h3 fw-bold mb-3">Envie-nos uma Mensagem</h2>
             <p class="text-muted mb-4">Preencha o formulário abaixo e retornaremos o mais breve possível.</p>
 
-            <form method="post" class="p-4 border rounded shadow-sm bg-light">
+            <form method="post" id="contato-form" class="p-4 border rounded shadow-sm bg-light">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="mb-3">
@@ -40,14 +40,6 @@
                     Enviar Mensagem <i class="bi bi-send-fill ms-2"></i>
                 </button>
             </form>
-
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} mt-3" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
         </div>
 
         <div class="col-lg-5">
@@ -81,5 +73,5 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 {% endblock %}

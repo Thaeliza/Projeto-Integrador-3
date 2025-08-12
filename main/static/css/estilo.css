@@ -29,7 +29,6 @@ body {
 
 .container {
     max-width: 1200px;
-    /* Largura padrão para o container do Bootstrap, ajuste conforme necessário */
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
@@ -38,7 +37,6 @@ body {
 /* --- Estilos da Barra de Navegação (Header e Nav.main-nav) --- */
 header {
     background-color: var(--primary-color);
-    /* Navbar agora usa o rosa principal */
     color: var(--text-light);
     padding: 1.5em 0;
     box-shadow: 0 3px 8px var(--shadow-color);
@@ -53,29 +51,24 @@ header {
         transform: translateY(-100%);
         opacity: 0;
     }
-
     to {
         transform: translateY(0);
         opacity: 1;
     }
 }
 
-
 /* --- Estilos do Conteúdo Principal (tag <main>) --- */
 .main-content {
     flex-grow: 1;
-    padding: 20;
-    /* Remove padding do main. O container interno terá padding. */
+    padding: 20px;
     background-color: rgba(255, 255, 255, 0.9);
-    /* Fundo para o conteúdo do main */
     margin: 40px auto;
-    /* Margem vertical e centraliza o main */
     max-width: 1200px;
-    /* Largura máxima para a área do main. Ajuste ou remova se quiser largura total. */
     box-shadow: 0 8px 20px var(--shadow-color);
     border-radius: 12px;
     animation: fadeInContent 1s ease forwards;
     box-sizing: border-box;
+    width: 95%; /* Ajuste para o layout da página de login */
 }
 
 @keyframes fadeInContent {
@@ -83,10 +76,16 @@ header {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Garante que o main se ajuste em telas maiores sem quebrar */
+@media (min-width: 768px) {
+    .main-content {
+        width: auto;
     }
 }
 
@@ -101,7 +100,6 @@ header {
 .hero-image-container {
     width: 100%;
     height: 300px;
-    /* **ALTURA MENOR para a Hero Image** - Ajuste se necessário */
     overflow: hidden;
 }
 
@@ -127,27 +125,20 @@ header {
 }
 
 /* --- Estilos para Carrosséis Bootstrap (Customizações) --- */
-/* Estes estilos afetam os carrosséis criados com as classes 'carousel slide' do Bootstrap */
-/* Adicione aqui qualquer customização que você queira para os carrosséis do Bootstrap */
 .carousel {
     margin-bottom: 40px;
-    /* Espaço após cada carrossel */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     border-radius: 12px;
     overflow: hidden;
-    /* Importante para bordas arredondadas e sombras */
 }
 
 .carousel-inner {
     border-radius: 12px;
-    /* Se quiser arredondar o conteúdo interno */
 }
 
 .carousel-item img {
     height: 450px;
-    /* Altura fixa para imagens de carrossel. Ajuste. */
     object-fit: cover;
-    /* Garante que a imagem preencha sem distorcer */
 }
 
 .carousel-caption {
@@ -161,19 +152,15 @@ header {
 @media (max-width: 768px) {
     .carousel-item img {
         height: 300px;
-        /* Ajuste para mobile */
     }
-
     .carousel-caption {
         padding: 10px;
         font-size: 0.8em;
     }
-
     .carousel-caption h5 {
         font-size: 1.2em;
     }
 }
-
 
 /* --- Seção Notícias (da Home) --- */
 .noticias-section {
@@ -183,7 +170,6 @@ header {
     margin-bottom: 40px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
-
 
 /* --- Seção Projeto Sarah --- */
 .projeto-sarah-section {
@@ -290,7 +276,6 @@ header {
     }
 }
 
-
 /* --- Seção Depoimentos (da Home) --- */
 .depoimentos-section {
     background-color: var(--primary-light);
@@ -300,7 +285,6 @@ header {
     margin-bottom: 40px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
-
 
 /* --- Classes utilitárias de cor para o tema --- */
 .text-mana-primary {
@@ -314,8 +298,6 @@ header {
 .text-mana-secondary {
     color: #6c757d !important;
 }
-
-/* Exemplo de uma cor secundária que não é rosa */
 
 .btn-mana-primary {
     background-color: var(--primary-color);
@@ -357,14 +339,12 @@ header {
     border-color: var(--primary-color);
 }
 
-
 /* --- Responsividade Geral (navbar, main) --- */
 @media (max-width: 992px) {
     .main-nav ul li {
         margin: 0 10px;
         font-size: 1rem;
     }
-
     main {
         max-width: 90%;
         margin: 30px auto;
@@ -376,38 +356,30 @@ header {
         flex-direction: column;
         align-items: center;
     }
-
     .main-nav ul li {
         margin: 10px 0;
     }
-
     main {
         margin: 20px 15px;
         padding: 20px;
         border-radius: 8px;
     }
-
     .section-title {
         font-size: 2em;
     }
-
     .section-description {
         font-size: 1em;
     }
-
     .titulo-doacao h1 {
         font-size: 2.2em;
     }
-
     .botao-doar button {
         font-size: 1.3em;
         padding: 15px 30px;
     }
-
     .campanhas h2 {
         font-size: 1.8em;
     }
-
     .icon-circle {
         width: 60px;
         height: 60px;

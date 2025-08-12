@@ -1,15 +1,17 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 
-<title>{% block title %}Doação{% endblock %}</title>
+{% block title %}Doação - Projeto Sarah{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/doacao.css' %}" />
-
-<div class="doacao-pix">
-  <h2>Faça uma doação via Pix</h2>
-  <p>Escaneie o QR Code abaixo com o aplicativo do seu banco para fazer uma doação:</p>
-  <img id="logopix" src="{% static 'img/qr-code-do-pix.jpg' %}" alt="QR Code do Pix">   
+<div class="container my-5 text-center">
+    <div class="card p-5 shadow-sm">
+        <div class="doacao-pix">
+            <h2 class="fw-bold mb-3">Faça uma doação via Pix</h2>
+            <p class="lead mb-4">Escaneie o QR Code abaixo com o aplicativo do seu banco para fazer uma doação de forma rápida e segura:</p>
+            <img id="logopix" src="{{ static_images.pix_qr_code.image.url }}" alt="{{ static_images.pix_qr_code.description }}" class="img-fluid rounded border shadow-sm">
+        </div>
+    </div>
 </div>
-
-{% endblock content %}  agora a pagina de doacao 
+{% endblock content %}
+```html

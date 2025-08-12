@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ acao.titulo }} - Projeto Sarah{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h1 class="display-4 text-center mb-4">{{ acao.titulo }}</h1>
+            <div class="text-center text-muted mb-4">
+                <small>Publicado em: {{ acao.data_publicacao|date:"d/m/Y" }}</small>
+            </div>
+            
+            {% if acao.imagem %}
+            <img src="{{ acao.imagem.url }}" class="img-fluid rounded shadow-sm mb-4" alt="{{ acao.titulo }}">
+            {% endif %}
+
+            <p>{{ acao.descricao_completa|safe }}</p>
+
+            <a href="{% url 'nossas_acoes' %}" class="btn btn-outline-secondary mt-5">
+                <i class="bi bi-arrow-left me-2"></i> Voltar para Todas as Ações
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

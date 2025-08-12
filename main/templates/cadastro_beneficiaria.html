@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cadastro de Beneficiária{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 text-center mb-4">Cadastro de Beneficiária</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post" class="card p-4 shadow-sm">
+                {% csrf_token %}
+                <h2 class="h5 mb-4">Informações Pessoais</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.nome_completo.id_for_label }}" class="form-label">Nome Completo</label>
+                        {{ form.nome_completo }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.data_nascimento.id_for_label }}" class="form-label">Data de Nascimento</label>
+                        {{ form.data_nascimento }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.telefone.id_for_label }}" class="form-label">Telefone de Contato</label>
+                    {{ form.telefone }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.endereco.id_for_label }}" class="form-label">Endereço Completo</label>
+                    {{ form.endereco }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.situacao_gravidez.id_for_label }}" class="form-label">Situação da Gravidez</label>
+                    {{ form.situacao_gravidez }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.historico_medico.id_for_label }}" class="form-label">Histórico Médico Relevante</label>
+                    {{ form.historico_medico }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.necessidades.id_for_label }}" class="form-label">Necessidades Atuais</label>
+                    {{ form.necessidades }}
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

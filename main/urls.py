@@ -1,18 +1,17 @@
-# seu_app/urls.py (o urls.py DENTRO do seu aplicativo)
-
 from django.urls import path
-from . import views # Aqui sim, 'from . import views' está correto
+from . import views
 
 urlpatterns = [
-    path('quem-somos/', views.quem_somos, name='quem_somos'),
     path('', views.home, name='home'),
-    path('nossas_acoes/', views.nossas_acoes, name='nossas_acoes'),
+    path('quem-somos/', views.quem_somos, name='quem_somos'),
+    path('nossas-acoes/', views.nossas_acoes, name='nossas_acoes'),
+    path('nossas-acoes/<slug:slug>/', views.detalhe_acao, name='detalhe_acao'),
+    path('como-ajudar/', views.como_ajudar, name='como_ajudar'),
+    path('doacao/', views.doacao, name='doacao'),
     path('transparencia/', views.transparencia, name='transparencia'),
-    path('preciso-de-ajuda/', views.preciso_de_ajuda, name='preciso_de_ajuda'),
-    path('como_ajudar/', views.como_ajudar, name='como_ajudar'),
-    path('registration/login/', views.cadastro, name='cadastro'),
     path('contato/', views.contato, name='contato'),
-    path('agenda_google_view/', views.agenda_google_view, name='agenda_google_view'),
-    path('doacao/', views.doacao, name='doacao'), # Se 'doacao' for uma URL separada
-    # path('cadastro/', views.cadastro, name='cadastro'), # URL para a view de cadastro
+    path('registro/', views.registro, name='registro'),
+    path('cadastro-beneficiaria/', views.cadastro_beneficiaria, name='cadastro_beneficiaria'),
+    path('cadastro-colaborador/', views.cadastro_colaborador, name='cadastro_colaborador'),
+    path('relatorio-usuarios/', views.relatorio_usuarios, name='relatorio_usuarios'),
 ]

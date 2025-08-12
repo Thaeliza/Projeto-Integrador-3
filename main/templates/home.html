@@ -1,134 +1,146 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Página Inicial - Instituto Maná{% endblock %}
-
-{% block extra_css %}
-   
-{% endblock %}
+{% block title %}Página Inicial - Projeto Sarah{% endblock %}
 
 {% block content %}
 
 <section>
     <div class="hero">
-        <img src="{% static 'img/imagem-gravida-projetosarah.jpg' %}" alt="Imagem de destaque" class="img-fluid">
+        <img src="{{ static_images.hero_image.image.url }}" alt="{{ static_images.hero_image.description }}" class="img-fluid">
     </div>
 </section>
 
-<main class="main-content">
-
-{# Seção de Notícias com Carrossel Bootstrap #}
-<section class="my-5"> {# Adicionado margem do Bootstrap para espaçamento #}
-    <h1 class="text-center mb-4">Notícias</h1> {# Título centralizado, margem inferior #}
-    <p class="text-center mb-5">Notícias de eventos e projetos:</p>
-
-    {# Carrossel Bootstrap para Notícias #}
-    <div id="noticiasCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for caso in casos %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <div class="d-flex justify-content-center"> {# Cards centralizados #}
-                    <div class="card" style="width: 20rem;"> {# Card Bootstrap, ajuste a largura conforme necessário #}
-                        {% if caso.imagem %}
-                        <img src="{{ caso.imagem.url }}" class="card-img-top" alt="{{ caso.titulo }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ caso.titulo }}</h5>
-                            <p class="card-text">{{ caso.descricao }}</p>
+<!-- Seção de Notícias com Carrossel de Múltiplos Cards -->
+<section class="my-5">
+    <div class="container">
+        <h1 class="text-center mb-4">Notícias</h1>
+    
+        <div id="noticiasCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {# Loop para agrupar 3 cards por slide #}
+                {% for caso in casos %}
+                    {% if forloop.counter0|divisibleby:"3" %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-5">
+                    {% endif %}
+    
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0">
+                            {% if caso.imagem %}
+                            <img src="{{ caso.imagem.url }}" class="card-img-top" alt="{{ caso.titulo }}">
+                            {% else %}
+                            <img src="{% static 'img/placeholder_acao.jpg' %}" class="card-img-top" alt="Imagem Padrão de Ação">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ caso.titulo }}</h5>
+                                <p class="card-text">{{ caso.descricao }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+    
+                    {% if forloop.counter|divisibleby:"3" or forloop.last %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#noticiasCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#noticiasCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Próximo</span>
-        </button>
-        {# Indicadores Opcionais #}
-        <div class="carousel-indicators">
-            {% for caso in casos %}
-            <button type="button" data-bs-target="#noticiasCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
----
-
-<section class="projeto-sarah-section my-5 text-center"> {# Adicionado espaçamento do Bootstrap e conteúdo centralizado #}
-    <div class="titulo-doacao">
-        <hr class="w-75 mx-auto my-4"> {# HR centralizado e mais estreito #}
-        <h1 class="display-4">PROJETO SARAH</h1> {# Título maior #}
-    </div>
-
-    <div class="botao-doar my-4">
-        <button class="btn btn-lg btn-primary" onclick="location.href='{% url 'doacao' %}'">DOE AGORA!</button> {# Estilo de botão do Bootstrap #}
-    </div>
-
-    <div class="campanhas">
-        <h2 class="mb-3">Campanhas de Arrecadação</h2>
-        <p class="lead">Use este espaço para destacar seus serviços mais populares. Você também pode usar isso para seus produtos principais.</p>
-    </div>
-
-    <div class="icone-simples mt-5">
-        <div class="icon-circle mx-auto p-4 border border-primary rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px; font-size: 3rem;">
-            <span>💖</span>
+    
+            <button class="carousel-control-prev" type="button" data-bs-target="#noticiasCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#noticiasCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+    
+            <div class="carousel-indicators">
+                {% for caso in casos %}
+                    {% if forloop.counter0|divisibleby:"3" %}
+                        <button type="button" data-bs-target="#noticiasCarousel" data-bs-slide-to="{{ forloop.counter0|divisibleby:'3' }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter0|add:1 }}"></button>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </section>
 
----
+<!-- Seção do PROJETO SARAH -->
+<section class="projeto-sarah-section my-5 text-center">
+    <div class="container">
+        <div class="titulo-doacao">
+            <hr class="w-75 mx-auto my-4">
+            <h1 class="display-4">PROJETO SARAH</h1>
+        </div>
 
-{# Seção de Depoimentos com Carrossel Bootstrap #}
-<section class="my-5"> {# Adicionado margem do Bootstrap para espaçamento #}
-    <h1 class="text-center mb-4">Depoimentos</h1> {# Título centralizado, margem inferior #}
-    <p class="text-center mb-5">Conheça algumas histórias de como estamos ajudando meninas grávidas:</p>
+        <div class="botao-doar my-4">
+            <a class="btn btn-lg btn-primary shadow-sm" href="{% url 'doacao' %}">DOE AGORA!</a>
+        </div>
 
-    {# Carrossel Bootstrap para Depoimentos #}
-    <div id="depoimentosCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for depoimento in depoimentos %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <div class="d-flex justify-content-center"> {# Cards centralizados #}
-                    <div class="card" style="width: 20rem;"> {# Card Bootstrap, ajuste a largura conforme necessário #}
-                        {% if depoimento.imagem %}
-                        <img src="{{ depoimento.imagem.url }}" class="card-img-top" alt="{{ depoimento.titulo }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ depoimento.titulo }}</h5>
-                            <p class="card-text">{{ depoimento.texto }}</p>
+        <div class="campanhas">
+            <h2 class="mb-3">Campanhas de Arrecadação</h2>
+            <p class="lead">Use este espaço para destacar seus serviços mais populares. Você também pode usar isso para seus produtos principais.</p>
+        </div>
+
+        <div class="icone-simples mt-5">
+            <div class="icon-circle mx-auto p-4 border border-primary rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px; font-size: 3rem;">
+                <span>💖</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção de Depoimentos com Carrossel de Múltiplos Cards -->
+<section class="my-5 bg-light p-5">
+    <div class="container">
+        <h1 class="text-center mb-4">Depoimentos</h1>
+        <p class="text-center mb-5">Conheça algumas histórias de como estamos ajudando meninas grávidas:</p>
+        
+        <div id="depoimentosCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for depoimento in depoimentos %}
+                    {% if forloop.counter0|divisibleby:"3" %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-5">
+                    {% endif %}
+
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0">
+                            {% if depoimento.imagem %}
+                                <img src="{{ depoimento.imagem.url }}" class="card-img-top" alt="{{ depoimento.nome }}" style="object-fit: cover; height: 200px;">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ depoimento.nome }}</h5>
+                                <p class="card-text">{{ depoimento.texto }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    {% if forloop.counter|divisibleby:"3" or forloop.last %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Próximo</span>
-        </button>
-        {# Indicadores Opcionais #}
-        <div class="carousel-indicators">
-            {% for depoimento in depoimentos %}
-            <button type="button" data-bs-target="#depoimentosCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-            {% endfor %}
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+
+            <div class="carousel-indicators">
+                {% for depoimento in depoimentos %}
+                    {% if forloop.counter0|divisibleby:"3" %}
+                        <button type="button" data-bs-target="#depoimentosCarousel" data-bs-slide-to="{{ forloop.counter0|divisibleby:'3' }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter0|add:1 }}"></button>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </section>
 
-
-</main>
-
-{% endblock %}
-
-{% block extra_js %}
-    {# Removido home_scripts.js, pois o JS do Bootstrap lida com os carrosséis #}
 {% endblock %}

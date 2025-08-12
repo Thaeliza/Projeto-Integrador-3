@@ -1,91 +1,72 @@
-{% extends 'base.html' %} {# Extende seu template base #}
-{% load static %} {# Carrega a tag 'static' #}
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Transparência - Instituto Maná{% endblock %} {# Título da página #}
+{% block title %}Transparência - Projeto Sarah{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/transparencia.css' %}" /> {# CSS específico para a página de transparência #}
+<link rel="stylesheet" href="{% static 'css/transparencia.css' %}" />
 {% endblock extra_css %}
 
-
-{% block content %} {# Bloco de conteúdo #}
-<main class="container my-5"> {# Container principal da página com margem vertical #}
+{% block content %}
+<div class="container my-5">
     {# Título principal da página #}
     <section class="mb-5 text-center">
-        <h1 class="display-4 fw-bold text-success">Transparência</h1> {# Título grande, negrito, verde (success) #}
-        <p class="lead text-secondary">Nosso compromisso com a clareza, ética e prestação de contas.</p> {# Texto principal, cor secundária #}
+        <h1 class="display-4 fw-bold text-success">Transparência</h1>
+        <p class="lead text-secondary">Nosso compromisso com a clareza, ética e prestação de contas.</p>
     </section>
 
     {# Seção 1: Nossa Política de Transparência #}
-    <section class="row align-items-center mb-5 py-4 bg-light rounded shadow-sm"> {# Linha, alinhamento vertical, margem inferior, padding vertical, fundo claro, arredondado, sombra #}
-        <div class="col-md-6 mb-3 mb-md-0"> {# Coluna para imagem, margem inferior em telas pequenas #}
-            <img src="{% static 'img/transparencia.png' %}" class="img-fluid rounded shadow-sm" alt="Política de Transparência"> {# Imagem responsiva, arredondada, sombra #}
+    <section class="row align-items-center mb-5 py-4 bg-light rounded shadow-sm">
+        <div class="col-md-6 mb-3 mb-md-0">
+            {% if static_images.transparencia_image %}
+                <img src="{{ static_images.transparencia_image.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ static_images.transparencia_image.description }}">
+            {% endif %}
         </div>
         <div class="col-md-6">
-            <h2 class="h3 mb-3 text-success">Nossa Política</h2> {# Título h3, margem inferior, verde (success) #}
+            <h2 class="h3 mb-3 text-success">Nossa Política</h2>
             <p>Para o Projeto Sarah, uma iniciativa do Instituto Maná, a **transparência é o alicerce** desde o início. Nos comprometemos a operar com clareza em todas as nossas ações e decisões. Estamos construindo uma política de transparência para que você sempre tenha acesso claro às informações sobre nossa governança, o uso dos recursos destinados ao Projeto Sarah e o impacto de nossas iniciativas, compreendendo nosso trabalho e a integridade que nos move.</p>
-            <a href="{% static 'docs/politica_transparencia.pdf' %}" class="btn btn-outline-success mt-3" download> {# Botão com contorno verde, margem superior #}
+            
+            {% if politica %}
+            <a href="{{ politica.documento.url }}" class="btn btn-outline-success mt-3" download>
                 <i class="bi bi-file-earmark-text me-2"></i>Acesse a Política Completa
             </a>
+            {% else %}
+            <p class="text-muted mt-3">A política de transparência ainda não foi publicada.</p>
+            {% endif %}
         </div>
     </section>
 
-    {# Seção 2: Relatórios de Atividades e Financeiros #}
-    <section class="mb-5"> {# Margem inferior #}
-        <h2 class="h3 mb-4 text-center text-success">Relatórios e Prestação de Contas</h2> {# Título h3, margem inferior, centralizado, verde (success) #}
-        <p class="text-center text-muted">Acompanhe nossos resultados e o uso dos recursos que nos são confiados.</p> {# Texto centralizado, cor mutada #}
+    {# Seção 2: Relatórios de Atividades e Financeiros (agora vêm do banco de dados) #}
+    <section class="mb-5">
+        <h2 class="h3 mb-4 text-center text-success">Relatórios e Prestação de Contas</h2>
+        <p class="text-center text-muted">Acompanhe nossos resultados e o uso dos recursos que nos são confiados.</p>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> {# Grid responsivo com 1, 2 ou 3 colunas e espaçamento #}
-            {# Exemplo de um Relatório Anual #}
-            <div class="col">
-                <div class="card h-100 shadow-sm border-0"> {# Card com altura igual, sombra, sem borda #}
-                    <div class="card-body">
-                        <h5 class="card-title text-success">Relatório Anual 2024</h5> {# Título do card, verde (success) #}
-                        <p class="card-text">Um panorama completo de nossas atividades, conquistas e demonstrativos financeiros do ano de 2024.</p>
-                        <a href="{% static 'docs/relatorio_2024.pdf' %}" class="btn btn-sm btn-success" download> {# Botão pequeno, verde #}
-                            <i class="bi bi-download me-2"></i>Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {# Exemplo de um Relatório Financeiro Detalhado #}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for balanco in balancos %}
             <div class="col">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h5 class="card-title text-success">Demonstrativo Financeiro Q1 2025</h5>
-                        <p class="card-text">Detalhes sobre as receitas e despesas do primeiro trimestre de 2025.</p>
-                        <a href="{% static 'docs/financeiro_q1_2025.pdf' %}" class="btn btn-sm btn-success" download>
+                        <h5 class="card-title text-success">{{ balanco.titulo }}</h5>
+                        <p class="card-text">{{ balanco.descricao }}</p>
+                        <a href="{{ balanco.documento.url }}" class="btn btn-sm btn-success" download>
                             <i class="bi bi-download me-2"></i>Download PDF
                         </a>
                     </div>
                 </div>
             </div>
-            {# Você pode adicionar mais cards para outros relatórios aqui, ou usar um loop do Django se tiver um modelo de "Documento" #}
-            <div class="col">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h5 class="card-title text-success">Relatório de Impacto 2023</h5>
-                        <p class="card-text">Conheça os resultados concretos que nossas ações geraram no ano de 2023.</p>
-                        <a href="{% static 'docs/impacto_2023.pdf' %}" class="btn btn-sm btn-success" download>
-                            <i class="bi bi-download me-2"></i>Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">Nenhum balanço disponível no momento.</div>
+            {% endfor %}
         </div>
-        <p class="text-center mt-4">
-            <a href="#" class="btn btn-outline-secondary">Ver todos os relatórios arquivados <i class="bi bi-box-arrow-up-right ms-2"></i></a>
-            {# Você pode mudar este link para uma página onde você liste todos os documentos dinamicamente #}
-        </p>
     </section>
 
     {# Seção 3: Perguntas Frequentes sobre Transparência #}
-    <section class="mb-5 py-4 bg-light rounded shadow-sm p-4"> {# Margem inferior, padding vertical, fundo claro, arredondado, sombra #}
-        <h2 class="h3 mb-4 text-center text-success">Dúvidas Frequentes</h2> {# Título h3, margem inferior, centralizado, verde (success) #}
-        <div class="accordion" id="faqTransparencia"> {# Componente Accordion #}
+    <section class="mb-5 py-4 bg-light rounded shadow-sm p-4">
+        <h2 class="h3 mb-4 text-center text-success">Dúvidas Frequentes</h2>
+        <div class="accordion" id="faqTransparencia">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> {# Botão do acordeão verde com texto branco #}
+                    <button class="accordion-button bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Como posso verificar a aplicação dos recursos?
                     </button>
                 </h2>
@@ -97,7 +78,7 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> {# Botão do acordeão verde com texto branco (colapsado) #}
+                    <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Quem são os responsáveis pela governança da organização?
                     </button>
                 </h2>
@@ -107,15 +88,14 @@
                     </div>
                 </div>
             </div>
-            {# Adicione mais itens do acordeão conforme necessário #}
         </div>
     </section>
 
     {# Seção 4: Contato para Dúvidas sobre Transparência #}
-    <section class="text-center py-5 bg-info text-white rounded shadow"> {# Centraliza texto, padding vertical, fundo azul (info), texto branco, arredondado, sombra #}
-        <h2 class="h3 mb-3 fw-bold">Ainda tem Dúvidas?</h2> {# Título h3, margem inferior, negrito #}
-        <p class="lead">Nosso canal de comunicação está aberto para esclarecer qualquer questão sobre nossa transparência e prestação de contas.</p> {# Texto principal #}
-        <a href="{% url 'contato' %}" class="btn btn-lg btn-light mt-3 shadow-sm">Entre em Contato Conosco</a> {# Botão grande, claro, margem superior, sombra #}
+    <section class="text-center py-5 bg-info text-white rounded shadow">
+        <h2 class="h3 mb-3 fw-bold">Ainda tem Dúvidas?</h2>
+        <p class="lead">Nosso canal de comunicação está aberto para esclarecer qualquer questão sobre nossa transparência e prestação de contas.</p>
+        <a href="{% url 'contato' %}" class="btn btn-lg btn-light mt-3 shadow-sm">Entre em Contato Conosco</a>
     </section>
-</main>
-{% endblock content %}
+</div>
+{% endblock %}

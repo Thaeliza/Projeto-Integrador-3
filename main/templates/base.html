@@ -5,135 +5,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Instituto Maná{% endblock %}</title>
+    <title>{% block title %}Projeto Sarah{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 
-{% block extra_css %}
-
-{% endblock %}
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light"> {# Added Bootstrap classes for navigation #}
-            <div class="container"> {# Added container to control width #}
-                <a class="navbar-brand" href="{% url 'home' %}">Projeto Sarah</a> {# Optional: Add a brand/logo #}
+    <header class="shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-mana-primary">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                    {% if static_images.logo_header %}
+                        <img src="{{ static_images.logo_header.image.url }}" alt="{{ static_images.logo_header.description }}" height="40" class="me-2">
+                    {% endif %}
+                    <span>Projeto Sarah</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto"> {# ms-auto pushes items to the right #}
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Início</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'quem_somos' %}">Quem Somos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'nossas_acoes' %}">Nossas Ações</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'transparencia' %}">Transparência</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'contato' %}">Contato</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'agenda_google_view' %}">Agenda</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'doacao' %}">Doação</a></li>
+                        
+                        {% if user.is_staff %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'cadastro_beneficiaria' %}">Cadastrar Beneficiária</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cadastro_colaborador' %}">Cadastrar Colaborador</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <form action="{% url 'logout' %}" method="post" class="d-inline-block">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-link nav-link">Sair</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    {# Bootstrap Carousel: This is the primary carousel, global across all pages #}
-  <div class="carousel-item {% if forloop.first %}active{% endif %}">
-    <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.title }}">
-    {% if image.title or image.description %}
-    <div class="carousel-caption"> {# REMOVIDO d-none d-md-block #}
-        <h5>{{ image.title }}</h5>
-        <p>{{ image.description }}</p>
-    </div>
-    {% endif %}
-</div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-        <div class="carousel-indicators"> {# Optional: Add indicators for navigation #}
-            {% for image in carousel_images %}
-            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-            {% endfor %}
+    <main class="main-content">
+        <div class="container mt-4">
+            {% if messages %}
+                <ul class="messages list-unstyled">
+                    {% for message in messages %}
+                        <li class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% block content %}{% endblock %}
         </div>
-    </div>
+    </main>
 
-<main class="main-content">
-    {% block content %}
-
-    {% endblock %}
-</main>
-
-
-<footer>
-    <div class="footer-grid">
-        <div class="contato">
-            <h5>Contato</h5>
-            <p>
-                Telefone: (11) 9 8157-6013<br>
-                Email: contato@exemplo.com
-            </p>
+    <footer>
+        <div class="footer-grid">
+            <div class="contato">
+                <h5>Contato</h5>
+                <p>
+                    Telefone: (11) 9 8157-6013<br>
+                    Email: contato@exemplo.com
+                </p>
+            </div>
+            <div class="links-uteis">
+                <h5>Links Úteis</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li><a href="#">Serviços</a></li>
+                    <li><a href="{% url 'contato' %}">Contato</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="links-uteis">
+                <h5>Mapa do Site</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}">Início</a></li>
+                    <li><a href="{% url 'quem_somos' %}">Quem somos</a></li>
+                    <li><a href="{% url 'nossas_acoes' %}">Nossas Ações</a></li>
+                    <li><a href="{% url 'transparencia' %}">Transparência</a></li>
+                    <li><a href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
+                    <li><a href="{% url 'contato' %}">Contato</a></li>
+                </ul>
+            </div>
+            <div class="redes-sociais">
+                <h5>Redes Sociais</h5>
+                <ul>
+                    <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+                    <li>
+                        <a href="https://wa.me/5511981576013" target="_blank" class="whatsapp-link">
+                            {% if static_images.whatsapp_icon %}
+                                <img src="{{ static_images.whatsapp_icon.image.url }}" alt="{{ static_images.whatsapp_icon.description }}" style="width: 24px; vertical-align: middle;">
+                            {% endif %}
+                            Fale conosco no WhatsApp
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="logo d-flex flex-column align-items-center">
+                <i class="bi bi-heart-fill fs-2 text-warning"></i>
+                <p class="m-0 text-white mt-2">Projeto Sarah</p>
+            </div>
         </div>
+        <hr>
+        <p class="copyright">&copy; {% now "Y" %} Projeto Sarah. Todos os direitos reservados.</p>
+    </footer>
 
-        <div class="links-uteis">
-            <h5>Links Úteis</h5>
-            <ul>
-                <li><a href="{% url 'home' %}">Página Inicial</a></li> {# Changed to use Django URL #}
-                <li><a href="#">Serviços</a></li> {# Placeholder, update as needed #}
-                <li><a href="{% url 'contato' %}">Contato</a></li> {# Changed to use Django URL #}
-                <li><a href="#">Política de Privacidade</a></li> {# Placeholder, update as needed #}
-            </ul>
-        </div>
-
-        <div class="links-uteis">
-            <h5>Mapa do Site</h5>
-            <ul>
-                <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'quem_somos' %}">Quem somos</a></li>
-                <li><a href="{% url 'nossas_acoes' %}">Nossas Ações</a></li>
-                <li><a href="{% url 'transparencia' %}">Transparência</a></li>
-                <li><a href="{% url 'como_ajudar' %}">Como Ajudar</a></li>
-                <li><a href="{% url 'contato' %}">Contato</a></li>
-            </ul>
-        </div>
-
-        <div class="redes-sociais">
-            <h5>Redes Sociais</h5>
-            <ul>
-                <li><a href="https://www.facebook.com/story.php?story_fbid=2382721211921377&id=100005505635922&rdid=IVR43GOi0UpufhmI#">Facebook</a></li>
-                <li><a href="https://www.instagram.com/institutomanaong/?igsh=Mmo2NHlhMXBqdmtv#">Instagram</a></li>
-                <li><a href="https://wa.me/5511981576013" target="_blank" class="whatsapp-link">
-                <img src="{% static 'img/whatsapp-icon.png' %}" alt="WhatsApp" style="width: 24px; vertical-align: middle;">
-                Fale conosco no WhatsApp</a></li>
-            </ul>
-        </div>
-
-        <div class="logo">
-            <img src="{% static 'img/foto-footer.jpg' %}" alt="Projeto Sarah">
-        </div>
-    </div>
-    <hr>
-    <p class="copyright">&copy; 2025 Sua Empresa. Todos os direitos reservados.</p>
-
-</footer>
-
-{# JavaScript Global: Scripts that apply to the ENTIRE site #}
-{# Removed old custom carousel.js, Bootstrap handles it. #}
-{# Bootstrap's JS bundle is already included in the <head>, no need for a duplicate here #}
-
-{# Block for SPECIFIC JavaScript of child pages #}
-{% block extra_js %}{% endblock %}
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>
